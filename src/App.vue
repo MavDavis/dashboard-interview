@@ -30,6 +30,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
+  transition:0.2s ease;
 }
 
 .app {

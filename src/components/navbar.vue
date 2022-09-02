@@ -6,9 +6,9 @@
     >
       <div class="logo flex w-1/2">
         <router-link
-          class="text-2xl font-semibold tracking-wider"
+          class="text-2xl font-semibold tracking-wider uppercase"
           :to="{ name: 'Home' }"
-          >Mavs-Store</router-link
+          >Mavs-Blogs</router-link
         >
       </div>
       <div class="flex w-1/2">

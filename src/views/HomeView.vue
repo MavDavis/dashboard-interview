@@ -1,13 +1,21 @@
 <template>
   <div class="home">
+<Blog/>
+<Blog/>
 
-  </div>
+</div>
 </template>
 
 <script>
+import Blog from '@/components/Blog.vue';
 
 export default {
-  name: 'Home',
+    name: "Home",
+    data(){
+      return{
 
+      }
+    },
+    components: { Blog }
 }
 </script>

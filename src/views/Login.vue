@@ -12,8 +12,8 @@
   <div class="w-full">
     <h1 class="font-semibold tracking-wider text-xl text-center">Login to <span class="text-2xl font-bold">Mavs-Blogs</span></h1>
     <form class="bg-white px-5 pt-6 pb-8 mb-4">
-      <div class="mb-4">
-        <input
+        <div class="mb-4 relative ">
+        <i class="fas fa-envelope absolute top-3 left-3 text-dark z-10"></i>        <input
           class="
             bg-gray-100
             appearance-none
@@ -21,7 +21,7 @@
             rounded
             w-full
             py-2
-            px-3
+            px-8
             text-dark
             leading-tight
             focus:outline-none focus:shadow-outline
@@ -32,15 +32,15 @@
           placeholder="Email"
         />
       </div>
-      <div class="mb-6">
-        <input
+      <div class="mb-4 relative ">
+        <i class="fas fa-lock absolute top-3 left-3 text-dark z-10"></i>        <input
           class="
             appearance-none
             bg-gray-100
             rounded
             w-full
             py-2
-            px-3
+            px-8
             text-dark
             mb-3
             leading-tight
@@ -95,7 +95,9 @@ export default {
     data(){
         return{
             email:'',
-            password:''
+            password:'',
+     
+
         }
     }
 };

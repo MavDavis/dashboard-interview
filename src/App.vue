@@ -32,13 +32,16 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
-  transition:0.2s ease;
+  transition:0.8s ease;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+.app-wrapper{
+  scroll-behavior: smooth;
 }
 
 // .container {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap mt-auto bg-dark text-white p-4 justify-between">
+  <div class="flex flex-wrap mt-auto bg-dark text-white py-10 px-4 justify-between">
     <div class="w-full md:w-1/2 lg:w-1/2 flex flex-wrap justify-between">
       <div class="w-full md:w-1/2 lg:w-1/2 px-2 mb-4">
         <div class="flex flex-col">

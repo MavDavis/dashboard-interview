@@ -13,20 +13,20 @@
       </div>
       <div class="flex w-1/2">
         <div class="flex w-full items-center justify-end">
-          <router-link class="button hover:text-green" :to="{ name: 'Home' }"
+          <router-link class="button font-semibold hover:text-green" :to="{ name: 'Home' }"
             >Home</router-link
           >
           <router-link
-            class="button ml-6 hover:text-green"
+            class="button font-semibold ml-6 hover:text-green"
             :to="{ name: 'Home' }"
             >Create Post</router-link
           >
           <router-link
-            class="button mx-6 hover:text-green"
+            class="button font-semibold mx-6 hover:text-green"
             :to="{ name: 'Home' }"
             >Blog</router-link
           >
-          <router-link class="button hover:text-green" :to="{ name: 'Home' }"
+          <router-link class="button font-semibold hover:text-green" :to="{ name: 'Home' }"
             >login/SignUp</router-link
           >
         </div>

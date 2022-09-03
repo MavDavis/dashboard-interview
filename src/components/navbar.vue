@@ -18,15 +18,15 @@
           >
           <router-link
             class="button font-semibold ml-6 hover:text-green"
-            :to="{ name: 'Home' }"
+            :to="{ name: 'CreateBlog' }"
             >Create Post</router-link
           >
           <router-link
             class="button font-semibold mx-6 hover:text-green"
-            :to="{ name: 'Home' }"
+            :to="{ name: 'BlogView' }"
             >Blog</router-link
           >
-          <router-link class="button font-semibold hover:text-green" :to="{ name: 'Home' }"
+          <router-link class="button font-semibold hover:text-green" :to="{ name: 'Login' }"
             >login/SignUp</router-link
           >
         </div>
@@ -74,15 +74,15 @@
               :to="{ name: 'Home' }"
               >Home</router-link
             >
-            <router-link class="button hover:text-green" :to="{ name: 'Home' }"
+            <router-link class="button hover:text-green" :to="{ name: 'CreateBlog' }"
               >Create Post</router-link
             >
             <router-link
               class="button my-6 hover:text-green"
-              :to="{ name: 'Home' }"
+              :to="{ name: 'BlogView' }"
               >Blog</router-link
             >
-            <router-link class="button hover:text-green" :to="{ name: 'Home' }"
+            <router-link class="button hover:text-green" :to="{ name: 'Login' }"
               >login/SignUp</router-link
             >
           </div>

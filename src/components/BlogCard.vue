@@ -1,7 +1,7 @@
 <template>
   <div class="relative max-w-sm rounded transform overflow-hidden shadow-lg hover:rotate-2"
 >
-    <div class="absolute w-full h-3/4 px-4 flex items-start justify-end z-10  opacity-0  hover:opacity-100 ">
+    <div class="absolute w-full h-3/4 px-4 flex items-start justify-end z-10  " v-if="$store.state.editPost">
       <div
         class="bg-white  hover:text-white mr-2 hover:cursor-pointer p-2 mt-2 hover:bg-dark rounded-full flex justify-center items-center"
       >

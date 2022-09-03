@@ -1,7 +1,7 @@
 <template>
-  <header>
+  <header class="mb-5 bg-white" style="z-index:1000;">
     <nav
-      class="flex w-full justify-between items-center px-5 shadow py-4 fixed"
+      class="flex w-full justify-between items-center px-5 shadow py-4 fixed  bg-white"
       v-if="!mobileScreen"
     >
       <div class="logo flex w-1/2">
@@ -34,7 +34,7 @@
     </nav>
     <nav
       v-if="mobileScreen"
-      class="flex w-full justify-between items-center px-5 shadow py-4 fixed"
+      class="flex w-full justify-between items-center px-5 shadow py-4 fixed bg-white"
     >
       <div class="logo flex w-1/2">
         <router-link
@@ -129,6 +129,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
   .mobileNav{
     min-width:250px;
   }

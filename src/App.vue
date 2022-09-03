@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 * {
@@ -41,19 +41,19 @@ export default {
   min-height: 100vh;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-}
+// .container {
+//   max-width: 1440px;
+//   margin: 0 auto;
+// }
 
-.link {
-  cursor: pointer;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: black;
-}
+// .link {
+//   cursor: pointer;
+//   text-decoration: none;
+//   text-transform: uppercase;
+//   color: black;
+// }
 
-.link-light {
-  color: #fff;
-}
+// .link-light {
+//   color: #fff;
+// }.
 </style>

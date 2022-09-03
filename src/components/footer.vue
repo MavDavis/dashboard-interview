@@ -16,7 +16,7 @@
               uppercase
               hover:text-green
             "
-            :to="{ name: 'Home' }"
+            to="/none"
             >Mavs-Blogs</router-link
           >
           <div class="links mt-3">
@@ -45,13 +45,13 @@
       </div>
       <div class="w-full md:w-1/2 lg:w-1/2 px-2 mb-4 flex flex-col ">
         <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start mb-3">
-          <router-link class="uppercase hover:text-green " to="#">Home</router-link>
+          <router-link class="uppercase hover:text-green " to="/">Home</router-link>
         </div>
         <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start mb-3">
-          <router-link class="uppercase hover:text-green" to="#">Blog</router-link>
+          <router-link class="uppercase hover:text-green" to="/blogView">Blog</router-link>
         </div>
         <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start">
-          <router-link class="uppercase hover:text-green" to="#">Login/Register</router-link>
+          <router-link class="uppercase hover:text-green" to="/login">Login/Register</router-link>
         </div>
       </div>
     </div>

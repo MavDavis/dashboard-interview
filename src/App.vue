@@ -1,26 +1,50 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <Navbar/>
+      <div v-show="!navigation">
+        <Navbar />
+      </div>
       <router-view />
-      <Footer/>
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
-  import Navbar from './components/navbar.vue';
-import Footer from './components/footer.vue';
+import Navbar from "./components/navbar.vue";
+import Footer from "./components/footer.vue";
 export default {
   name: "app",
   components: { Navbar, Footer },
   data() {
-    return {};
+    return {
+      navigation: null,
+    };
   },
-  created() {},
+  created() {
+    this.checkRoute();
+  },
   mounted() {},
-  methods: {},
-  watch: {},
+  methods: {
+    checkRoute() {
+      if (
+        this.$route.name === "Login" ||
+        this.$route.name === "ForgotPassword" ||
+        this.$route.name === "Register"
+      ) {
+        this.navigation = true;
+        return;
+      } 
+        this.navigation = false;
+      
+    },
+  },
+  watch: {
+    $route() {
+
+      this.checkRoute();
+    },
+  },
 };
 </script>
 
@@ -32,7 +56,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
-  transition:0.4s ease;
+  transition: 0.4s ease;
 }
 
 .app {
@@ -40,7 +64,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
-.app-wrapper{
+.app-wrapper {
   scroll-behavior: smooth;
 }
 
@@ -59,4 +83,7 @@ export default {
 // .link-light {
 //   color: #fff;
 // }.
+.router-link-active{
+  color:#1DB954;
+}
 </style>

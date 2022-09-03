@@ -15,6 +15,7 @@ module.exports = {
         center:true
       },
         extend: {
+       
           colors:{
             'green':'#1DB954',
     

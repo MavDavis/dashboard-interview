@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
-
+import ForgotPassword from '../views/ForgotPassword'
 import CreateBlog from '../views/CreateBlog.vue'
 import BlogView from '../views/BlogView.vue'
 import Register from '../views/Register.vue'
@@ -55,6 +55,14 @@ component:Register,
 component:Login,
     meta:{
       title:'Login'
+    }
+  },
+  {
+    path: '/forgot-Password',
+    name: 'ForgotPassword',
+component:ForgotPassword,
+    meta:{
+      title:'ForgotPassword'
     }
   },
 ]

@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import { firebaseAuth } from "../firebase/firebaseInit";
 import { db } from "../firebase/firebaseInit";
 import { collection, getDoc, doc } from "firebase/firestore"; 
+import { getFirestore,  setDoc } from "firebase/firestore";
 export default createStore({
   state: {
     editPost:null,
@@ -41,8 +42,34 @@ export default createStore({
     
   },
   mutations: {
+    changeUserDetails(state){
+      const user = firebaseAuth.currentUser
+      const docRef = doc(db, "Users", user.uid);
+      const data = {
+        Firstname: state.userFirstname,
+        Lastname: state.userLastname,
+        Email: state.userEmail ,
+        Username:state.userUsername,
+        password:state.userPassword
+      };
+      setDoc(docRef, data)
+.then(docRef => {
+    console.log(docRef);
+})
+.catch(error => {
+    console.log(error);
+})
+    },
     toggleEditPost(state, payload){
     state.editPost = payload
+    },
+    changeFirstname(state, payload){
+      state.userFirstname = payload
+    },
+    changeLastname(state, payload){
+      state.userLastname = payload
+    },changeUsername(state, payload){
+      state.userUsername = payload
     },
     updateUser(state, payload){
       state.user = payload
@@ -70,11 +97,6 @@ state.UserInitials = initial
     }
   },
   actions: {
-    async getCurrentUser({commit}){
-      const querySnapshot = await getDocs(collection(db, "Users"));
-  
-commit('setProfileInfo', querySnapshot)
-    }
   },
   modules: {
   }

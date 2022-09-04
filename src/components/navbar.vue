@@ -38,13 +38,14 @@
             :to="{ name: 'BlogView' }"
             >Blog</router-link
           >
-          <router-link v-if="!user"
+          <router-link
+            v-if="!user"
             class="button font-semibold hover:text-green"
             :to="{ name: 'Login' }"
             >login/SignUp</router-link
           >
         </div>
-        <div v-if= "user" class="relative flex justify-end items-center w-1/4">
+        <div v-if="user" class="relative flex justify-end items-center w-1/4">
           <div
             @click="showOptions = !showOptions"
             class="
@@ -126,12 +127,18 @@
               </div>
             </div>
             <div class="flex p-3 flex-col justify-center items-start w-full">
-              <div class="option text-white mb-2 w-full">
+              <div
+                @click="showOptions = !showOptions"
+                class="option text-white mb-2 w-full"
+              >
                 <router-link to="/profile">
                   <i class="fas text-whit fa-user mr-2"></i>profile
                 </router-link>
               </div>
-              <div class="option text-white mb-2 w-full text-white">
+              <div
+                @click="showOptions = !showOptions"
+                class="option text-white mb-2 w-full text-white"
+              >
                 <router-link to="/admin">
                   <i class="fas text-white mr-2 fa"></i>Admin
                 </router-link>
@@ -180,10 +187,10 @@
         <transition name="mobile-nav">
           <div
             v-if="mobileScreenOpened"
-            style="height: 100vh"
             class="
               mobileNav
-              bg-black
+              bg-dark
+
               h-full
               flex flex-col
               text-white
@@ -194,24 +201,123 @@
               px-4
             "
           >
-            <router-link
-              class="button my-6 hover:text-green"
-              :to="{ name: 'Home' }"
-              >Home</router-link
-            >
-            <router-link
-              class="button hover:text-green"
-              :to="{ name: 'CreateBlog' }"
-              >Create Post</router-link
-            >
-            <router-link
-              class="button my-6 hover:text-green"
-              :to="{ name: 'BlogView' }"
-              >Blog</router-link
-            >
-            <router-link v-if="!user" class="button hover:text-green" :to="{ name: 'Login' }"
-              >login/SignUp</router-link
-            >
+            <div @click="toggleMobileScreenOpened" class="my-10 ">
+              <router-link
+                class="button my-6 hover:text-green text-3xl font-semibold tracking-wider"
+                :to="{ name: 'Home' }"
+                >Home</router-link
+              >
+            </div>
+            <div @click="toggleMobileScreenOpened" class="my-10 ">
+              <router-link
+                class="button hover:text-green text-3xl font-semibold tracking-wider"
+                :to="{ name: 'CreateBlog' }"
+                >Create Post</router-link
+              >
+            </div>
+            <div @click="toggleMobileScreenOpened" class="my-10 ">
+              <router-link
+                class="button my-6 hover:text-green text-3xl font-semibold tracking-wider"
+                :to="{ name: 'BlogView' }"
+                >Blog</router-link
+              >
+            </div>
+            <div @click="toggleMobileScreenOpened" class="my-10 ">
+              <router-link
+                v-if="!user"
+                class="button hover:text-green text-3xl font-semibold tracking-wider"
+                :to="{ name: 'Login' }"
+                >login/SignUp</router-link
+              >
+            </div>
+            <div v-if="user" class="relative flex flex-col justify-start items-start w-full">
+         
+          <div
+            class="
+              
+              bg-dark
+              w-full
+              h-fit
+              flex flex-col
+              items-center
+              justify-start
+            "
+          >
+            <div class="mb-5 flex flex-col items-start justify-start   w-full ">
+              <div
+                class="
+                  flex
+                  items-center
+                  justify-center
+                  p-1
+                  mb-3
+                  bg-white
+                  rounded-full
+                "
+              >
+                <h1
+                  class="
+                    text-dark
+                    font-semibold
+                    text-2xl
+                    flex
+                    justify-center
+                    items-center
+                  "
+                >
+                  {{ $store.state.UserInitials }}
+                </h1>
+              </div>
+              <div
+                class="info flex flex-col justify-start items-start "
+              >
+                <h1
+                  class="
+                    text-sm
+                    font-semibold
+                    text-white
+                    flex
+                    justify-start
+                    items-start
+                    mb-3
+                  "
+                >
+                  {{ $store.state.userFirstname }}
+                  {{ $store.state.userLastname }}
+                </h1>
+                <p class="text-sm text-white mb-3 flex max-w-full relative items-start justify-start">
+                  <i class="mr-2 fas fa-envelope text-sm text-white"></i
+                  >{{ $store.state.userEmail }}
+                </p>
+                <p class="text-sm text-white flex w-full mb-3 items-start justify-start">
+                  <i class="mr-2 fas fa-user text-sm text-white"></i
+                  >{{ $store.state.userUsername }}
+                </p>
+              </div>
+            </div>
+            <div class="flex  flex-col justify-start items-start w-full">
+              <div
+                class="option text-white mb-2 w-full"
+              >
+                <router-link to="/profile">
+                  <i class="fas text-whit fa-user mr-2"></i>profile
+                </router-link>
+              </div>
+              <div
+                class="option  mb-2 w-full text-white"
+              >
+                <router-link to="/admin">
+                  <i class="fas text-white mr-2 fa-user"></i>Admin
+                </router-link>
+              </div>
+              <div class="option text-white mb-2 w-full">
+                <button @click="logOut()" to="/">
+                  <i class="fas text-white mr-2 fa-user"></i>SignOUt
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
           </div>
         </transition>
       </div>
@@ -227,7 +333,7 @@ import { firebaseAuth } from "../firebase/firebaseInit";
 export default {
   computed: {
     user() {
-      return this.$store.state.user
+      return this.$store.state.user;
     },
   },
   data() {
@@ -278,7 +384,8 @@ export default {
 
 <style lang="scss" scoped>
 .mobileNav {
-  min-width: 250px;
+  width: 250px;
+  overflow-x: hidden;
 }
 * {
   transition: all 1s ease;

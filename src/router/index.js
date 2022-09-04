@@ -7,7 +7,9 @@ import BlogView from '../views/BlogView.vue'
 import Register from '../views/Register.vue'
 import About from '../views/AboutView.vue'
 import { nextTick } from 'vue'
+import Admin from '../views/Admin.vue'
 
+import Profile from '../views/Profile.vue'
 const routes = [
   {
     path: '/',
@@ -23,6 +25,22 @@ const routes = [
 component:About,
     meta:{
       title:'About'
+    }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+component:Admin,
+    meta:{
+      title:'Admin'
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+component:Profile,
+    meta:{
+      title:'Profile'
     }
   },
   {

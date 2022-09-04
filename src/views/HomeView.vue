@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Blog :post="welcomeScreen" />
+    <Blog :post="welcomeScreen" v-if="!user" />
     <div class="mb-5">
       <Blog v-for="posts in sampleBlogPost" :key="posts.title" :post="posts" />
     </div>
@@ -16,7 +16,7 @@
         />
       </div>
     </div>
-    <div class="my-5 w-full  px-5  bg-white text-dark flex justify-center flex-col items-center sm:items-start md:items-start lg:items-start">
+    <div v-if="!user" class="my-5 w-full  px-5  bg-white text-dark flex justify-center flex-col items-center sm:items-start md:items-start lg:items-start">
       <h2 class="font-semibold text-2xl tracking-wider relative text-center sm:text-start">
         Never miss a post. Register for your free account today!
       </h2>
@@ -58,7 +58,10 @@ export default {
   computed:{
 sampleBlogCards(){
   return this.$store.state.sampleBlogCards
-}
+},
+user() {
+    return this.$store.state.user
+  },
   },
   components: { Blog, BlogCard },
 };
@@ -67,4 +70,4 @@ sampleBlogCards(){
 .blogCards {
   min-height: 100vh;
 }
-</style>
+</style> 

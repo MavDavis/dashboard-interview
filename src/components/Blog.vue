@@ -14,16 +14,17 @@
       <h2 v-else class="uppercase font-semibold text-xl mb-4 tracking-wider">
         {{ post.title }}
       </h2>
-      <p v-if="post.welcomeScreen" class="w-full sm:w-70 md:w-50 lg:w-50">
+      <p v-if="post.welcomeScreen" class="w-full sm:w-70 md:w-50">
         {{ post.blogPost }}
       </p>
       <p v-else>
         {{ post.blogHtml }}
       </p>
-      <router-link class="mt-2 hover:tracking-widest" v-if="post.welcomeScreen" to="#"
+      <router-link class="mt-2 hover:tracking-widest" v-if="post.welcomeScreen" to="/login"
         >Login/Register<i class="fas fa-arrow-right text-white text-xs"></i
       ></router-link>
-      <router-link class="mt-2 hover:tracking-widest"  v-else to="#"
+      <router-link class="mt-2 hover:tracking-widest"  v-else to="#
+      /blogView"
         >View The Post<i class="fas fa-arrow-right text-dark text-xs"></i
       ></router-link>
     </div>

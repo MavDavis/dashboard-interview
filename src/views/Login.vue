@@ -150,7 +150,7 @@ export default {
                 .catch((error) => {
                   this.loading= false
                   this.error = true;
-                this.errMssg = error;
+                this.errMssg = error.message;
                 setTimeout(() => {
                     this.error = false;
                     this.errMssg = "";

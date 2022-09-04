@@ -25,10 +25,20 @@ export default {
   },
   created() {
     this.checkRoute();
+    onAuthStateChanged(firebaseAuth, (user) => {
+      this.$store.commit('updateUser', user);
+      if(user){
+        this.$store.commit('userDetail')
+      }
+  }
+)
   },
   mounted() {
     onAuthStateChanged(firebaseAuth, (user) => {
-console.log(user.uid)
+      this.$store.commit('updateUser', user);
+      if(user){
+        this.$store.commit('userDetail')
+      }
   }
 )
   },

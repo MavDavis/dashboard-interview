@@ -250,11 +250,11 @@ export default {
                     .catch((err) => {
                       this.loading = false
                     this.error = true;
-                    this.errMssg = err;
+                    this.errMssg = err.message;
                     setTimeout(() => {
                         this.error = false;
                         this.errMssg = "";
-                    }, 5000);
+                    }, 10000);
                 })
                     .then(() => {
                     setDoc(doc(db, "Users", this.id), {

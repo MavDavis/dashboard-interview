@@ -1,11 +1,19 @@
 <template>
-    <Modal v-if="modal" modalMssg="You will receive an email if this account exists" @closeModal="closeModal()"/>
+    <Modal v-if="modal" :modalMssg="modalMssg" @closeModal="closeModal()"/>
     <Loading v-if="loading"/>
     <div class=" login flex justify-center sm:justify-between items-center h-screen ">
         <div class=" w-full md:w-1/2">
   
   <div class="w-full">
     <h1 class="px-5 font-semibold tracking-wider text-xl text-center">Reset Password</h1>
+    <p class="text-sm text-dark text-center">
+Back to
+    <router-link
+      class="text-lg ml-1 font-semibold underline hover:tracking-wider"
+      :to="{ name: 'Login' }"
+      >Login</router-link
+    >
+  </p>
     <p class="text-sm text-dark text-center px-5">
  Forgot your password? Enter your email to reset it
 </p>
@@ -34,6 +42,7 @@
       <div class="flex flex-col items-center justify-between">
   
         <button
+        @click="resetPassword()"
           class="
             bg-dark
             hover:tracking-wider
@@ -61,19 +70,40 @@ Reset        </button>
 <script>
 import Modal from '@/components/Modal.vue';
 import Loading from '../components/Loading.vue';
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 export default {
     data() {
         return {
             email: "",
             modal:false,
-            loading:false
+            loading:false,
+            modalMssg:''
         };
     },
     components: { Modal,Loading },
     methods:{
         closeModal(){
             this.modal = false
+        },
+        resetPassword(){
+          this.loading = true
+const auth = getAuth();
+sendPasswordResetEmail(auth, this.email)
+  .then(() => {
+    this.loading=false
+   this.modal =true
+   this.modalMssg ='A password reset has been sent to you if your account exist'
+   this.email = ''
+  })
+  .catch((error) => {
+    this.loading=false
+    const errorCode = error.code;
+    this.modal =true
+   this.modalMssg = error.message;
+    // ..
+  });
+
         }
     }
 };

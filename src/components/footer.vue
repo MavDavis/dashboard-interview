@@ -53,7 +53,7 @@
         <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start mb-3">
           <router-link class="uppercase hover:text-green" to="/createBlog">Create Post</router-link>
         </div>
-        <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start">
+        <div v-if="!user" class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start">
           <router-link class="uppercase hover:text-green" to="/login">Login/Register</router-link>
         </div>
       </div>
@@ -66,7 +66,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    user() {
+      return this.$store.state.user
+    },
+  },
+};
 </script>
 
 <style>

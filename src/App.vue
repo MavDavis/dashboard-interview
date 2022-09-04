@@ -11,6 +11,8 @@
 </template>
 
 <script>
+    import { firebaseAuth } from "./firebase/firebaseInit";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from "./components/navbar.vue";
 import Footer from "./components/footer.vue";
 export default {
@@ -24,7 +26,12 @@ export default {
   created() {
     this.checkRoute();
   },
-  mounted() {},
+  mounted() {
+    onAuthStateChanged(firebaseAuth, (user) => {
+console.log(user.uid)
+  }
+)
+  },
   methods: {
     checkRoute() {
       if (

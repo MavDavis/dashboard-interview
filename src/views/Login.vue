@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading"/>
     <div class=" login flex justify-center sm:justify-between items-center h-screen ">
         <div class=" w-full md:w-1/2">
   <p class="text-sm text-dark text-center">
@@ -12,6 +13,19 @@
   <div class="w-full">
     <h1 class="font-semibold tracking-wider text-xl text-center">Login to <span class="text-2xl font-bold">Mavs-Blogs</span></h1>
     <form class="bg-white px-5 pt-6 pb-8 mb-4">
+      <p
+            v-if="error"
+            class="
+              error
+              text-center
+              mb-2
+              text-red-300 text-sm
+              tracking-wide
+              font-semibold
+            "
+          >
+            {{ errMssg }}
+          </p>
         <div class="mb-4 relative ">
         <i class="fas fa-envelope absolute top-3 left-3 text-dark z-10"></i>        <input
           class="
@@ -33,7 +47,13 @@
         />
       </div>
       <div class="mb-4 relative ">
-        <i class="fas fa-lock absolute top-3 left-3 text-dark z-10"></i>        <input
+        <i class="fas fa-lock absolute top-3 left-3 text-dark z-10"></i>     
+        <input
+              type="checkbox"
+              @click="toggledInputField"
+              class="absolute top-3 right-3 z-10"
+            />
+           <input
           class="
             appearance-none
             bg-gray-100
@@ -47,7 +67,7 @@
             focus:outline-none focus:shadow-outline
           "
           v-model="password"
-          type="password"
+          :type="inputField"
           placeholder="Password"
         />
       </div>
@@ -66,6 +86,7 @@
           Forgot Password?
         </router-link>
         <button
+        @click="Login()"
           class="
             bg-dark
             hover:tracking-wider
@@ -91,16 +112,54 @@
 </template>
 
 <script>
-export default {
-    data(){
-        return{
-            email:'',
-            password:'',
-     
+  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  import { firebaseAuth } from "../firebase/firebaseInit";
+import Loading from "@/components/Loading.vue";
 
+export default {
+    data() {
+        return {
+            email: "",
+            password: "",
+            loading:false,
+            error:false,
+            errMssg:'',
+            inputField:'password'
+        };
+    },
+    methods: {
+      toggledInputField() {
+            if (this.inputField == "password") {
+                this.inputField = "text";
+            }
+            else {
+                this.inputField = "password";
+            }},
+        Login() {
+          if(this.email === '' || this.password === ''){
+            return
+          }else{
+            this.loading = true;
+            let self = this;
+            signInWithEmailAndPassword(firebaseAuth, this.email, this.password)
+                .then((userCredential) => {
+                  console.log(userCredential.user.uid);
+                self.$router.push({ name: "Home" });
+                this.loading = false;
+            })
+                .catch((error) => {
+                  this.loading= false
+                  this.error = true;
+                this.errMssg = error;
+                setTimeout(() => {
+                    this.error = false;
+                    this.errMssg = "";
+                }, 20000);
+            });
         }
-    }
-};
+    },},
+    components: { Loading }
+}
 </script>
 
 <style lang="scss" scoped>

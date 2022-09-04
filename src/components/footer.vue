@@ -3,7 +3,7 @@
     <div class="w-full md:w-1/2 lg:w-1/2 flex flex-wrap justify-between">
       <div class="w-full md:w-1/2 lg:w-1/2 px-2 mb-4">
         <div class="flex flex-col">
-          <router-link
+          <a
             class="
               lg:text-2xl
               md:text-xl
@@ -16,8 +16,8 @@
               uppercase
               hover:text-green
             "
-            to="/none"
-            >Mavs-Blogs</router-link
+          href="#"
+            >Mavs-Blogs</a
           >
           <div class="links mt-3">
             <div
@@ -49,6 +49,9 @@
         </div>
         <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start mb-3">
           <router-link class="uppercase hover:text-green" to="/blogView">Blog</router-link>
+        </div>
+        <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start mb-3">
+          <router-link class="uppercase hover:text-green" to="/createBlog">Create Post</router-link>
         </div>
         <div class="w-full md:w-1/3 lg:w-1/3 text-center md:text-start lg:text-start">
           <router-link class="uppercase hover:text-green" to="/login">Login/Register</router-link>

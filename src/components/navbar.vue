@@ -5,10 +5,10 @@
       v-if="!mobileScreen"
     >
       <div class="logo flex w-1/2">
-        <router-link
+        <a
           class="text-2xl font-semibold tracking-wider uppercase"
-          :to="{ name: 'Home' }"
-          >Mavs-Blogs</router-link
+          href="#"
+          >Mavs-Blogs</a
         >
       </div>
       <div class="flex w-1/2">

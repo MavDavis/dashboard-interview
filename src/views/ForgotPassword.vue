@@ -1,5 +1,6 @@
 <template>
     <Modal v-if="modal" modalMssg="You will receive an email if this account exists" @closeModal="closeModal()"/>
+    <Loading v-if="loading"/>
     <div class=" login flex justify-center sm:justify-between items-center h-screen ">
         <div class=" w-full md:w-1/2">
   
@@ -59,14 +60,17 @@ Reset        </button>
 
 <script>
 import Modal from '@/components/Modal.vue';
+import Loading from '../components/Loading.vue';
+
 export default {
     data() {
         return {
             email: "",
-            modal:false
+            modal:false,
+            loading:false
         };
     },
-    components: { Modal },
+    components: { Modal,Loading },
     methods:{
         closeModal(){
             this.modal = false

@@ -1,4 +1,7 @@
 <template>
+  <div v-if="preview">
+    <PhotoPreview @closeModal="preview = false" />
+  </div>
   <div
     class="
       create-blog
@@ -12,10 +15,23 @@
       min-h-screen
     "
   >
-    <div class="err-message" :class="{ hidden: !error }">
+    <div
+      v-if="this.error"
+      class="
+        err-message
+        w-full
+        flex
+        mb-2
+        bg-dark
+        rounded-md
+        px-5
+        py-2
+        text-white
+      "
+    >
       <p>
         <span>Error:</span>
-        {{ errorMsg }}
+        {{ errorMssg }}
       </p>
     </div>
     <div
@@ -72,6 +88,7 @@
         >
         <input
           class="hidden"
+          @change="FileChanged()"
           type="file"
           ref="blogPhoto"
           id="blog-photo"
@@ -79,16 +96,9 @@
         />
         <button
           :disabled="!this.$store.state.blogPhotoFileUrl"
-          class="
-            bg-gray-300
-            rounded-full
-            px-3
-            py-2
-            text-white text-sm
-            sm:mx-3
-            mx-0
-          "
-          :class="{ 'opacity-100': !this.$store.state.blogPhotoFileUrl }"
+          @click="previewChange()"
+          class="bg-dark rounded-full px-3 py-2 text-white text-sm sm:mx-3 mx-0"
+          :class="{ 'bg-gray-300': !this.$store.state.blogPhotoFileUrl }"
         >
           Preview Photo
         </button>
@@ -96,10 +106,16 @@
       </div>
     </div>
     <div class="flex w-full flex-col sm:h-96">
-      <QuillEditor theme="snow" :modules="modules" v-model="blogHtml" />
+      <QuillEditor
+        theme="snow"
+        :modules="modules"
+        v-model:content="blogHtml"
+        contentType="html"
+      />
     </div>
     <div class="flex iems-center justify-start mt-4">
       <button
+        @click="uploadBlog()"
         class="
           ml-3
           hover:tracking-wider
@@ -114,7 +130,7 @@
         Publish Blog
       </button>
       <router-link
-        to="/"
+        :to="{ name: 'PostPreview' }"
         class="
           ml-3
           hover:tracking-wider
@@ -135,31 +151,137 @@
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import BlotFormatter from "quill-blot-formatter";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
-import { ref } from "@vue/reactivity";
+import { storage } from "../firebase/firebaseInit";
+import { db } from "../firebase/firebaseInit";
+import { doc, setDoc, addDoc,  Timestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// import { ref } from "@vue/reactivity";
+import PhotoPreview from "@/components/PhotoPreview.vue";
 export default {
-  setup: () => {
-    const error = ref(false);
-    const errorMssg = ref("");
-    const modules = {
-      name: "blotFormatter",
-      module: BlotFormatter,
-      options: {
-        /* options */
+  data() {
+    return {
+      preview: false,
+      file: null,
+      error: false,
+      errorMssg: "",
+      modules: {
+        name: "blotFormatter",
+        module: BlotFormatter,
+        options: {
+          /* options */
+        },
       },
     };
-    return { modules, error, errorMssg };
   },
+  computed: {
+    userId() {
+      return this.$store.state.UserId;
+    },
+    blogPhotoName() {
+      return this.$store.state.blogPhotoName;
+    },
+    blogTitle: {
+      get() {
+        return this.$store.state.blogTitle;
+      },
+      set(payload) {
+        this.$store.commit("updateBlogTitle", payload);
+      },
+    },
+    blogHtml: {
+      get() {
+        return this.$store.state.blogHtml;
+      },
+      set(payload) {
+        this.$store.commit("updateBlogHtml", payload);
+      },
+    },
+  },
+  methods: {
+    FileChanged() {
+      this.file = this.$refs.blogPhoto.files[0];
+      const filename = this.file.name;
+      this.$store.commit("filenameChanged", filename),
+        this.$store.commit("createFileUrl", URL.createObjectURL(this.file));
+    },
+    previewChange() {
+      this.preview = true;
+      console.log("hy");
+    },
+    uploadBlog() {
+      if (this.$store.state.blogHtml.length < 0) {
+        this.error = true;
+        this.errorMssg = "Please, enter a Post body ";
+
+        setTimeout(() => {
+          this.error = false;
+          this.errorMssg = " ";
+        }, 5000);
+
+        return;
+      } else if (this.$store.state.blogTitle.length < 0 ) {
+        this.error = true;
+        this.errorMssg = "Please, enter a Post Title ";
+
+        setTimeout(() => {
+          this.error = false;
+          this.errorMssg = " ";
+        }, 5000);
+
+      } else if (this.file == null) {
+        this.error = true;
+        this.errorMssg = "Please, enter a Post Image ";
+        setTimeout(() => {
+          this.error = false;
+        }, 5000);
+      } else {
+        this.error = false;
+        const imgRef = ref(
+          storage,
+          `documents/${this.$store.state.blogPhotoName}`
+        );
+
+        uploadBytes(imgRef, this.file).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+        }
+        ).then(() => {
+    getDownloadURL(imgRef).then((downloadURL) => {
+
+        const docData = {
+    blogUrl:downloadURL,
+    blogDate: Timestamp.fromDate(new Date("December 10, 1815")),
+  blogHtml : this.$store.state.blogHtml,
+  blogTitle: this.$store.state.blogTitle,
+  blogPhotoName: this.$store.state.blogPhotoName,
+
+  ProfileID:this.userId 
+
+};
+ setDoc(doc(db, "Blogs", uniqid ), docData);
+
+
+
+
+
+    })}).catch((err)=>{
+            console.log(err);
+        })
+      }
+      
+    },
+  },
+  components: { PhotoPreview },
 };
 </script>
 
 <style lang="scss">
-    .ql-editor{
-        overflow: scroll;
-        max-height: 50vh;
-        @media (max-width:576px) {
-            max-height:30vh;
-            height:30vh;
-            bottom: 5rem;
-        }
-    }
+.ql-editor {
+  overflow: scroll;
+  max-height: 50vh;
+  @media (max-width: 576px) {
+    max-height: 30vh;
+    height: 30vh;
+    bottom: 5rem;
+  }
+}
 </style>

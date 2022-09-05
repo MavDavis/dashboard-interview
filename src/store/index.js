@@ -29,6 +29,10 @@ export default createStore({
         blogDate: "September 3, 2022",
       },
     ],
+    blogPhotoName:'',
+    blogTitle:'',
+    blogHtml:'Write Your blog post here..',
+    blogPhotoFileUrl:'',
     user:null,
     userEmail:'',
     userFirstname:'',
@@ -74,7 +78,21 @@ export default createStore({
     updateUser(state, payload){
       state.user = payload
     },
+    updateBlogHtml(state, payload){
+      state.blogHtml = payload
+    },
+    updateBlogTitle(state, payload){
+      state.blogTitle = payload
 
+    },
+    filenameChanged(state, payload){
+      state.blogPhotoName = payload
+
+    },
+    createFileUrl(state, payload){
+      state.blogPhotoFileUrl = payload
+
+    },
    async userDetail(state){
     const user = firebaseAuth.currentUser
       const docRef = doc(db, "Users", user.uid);

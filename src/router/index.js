@@ -8,7 +8,7 @@ import Register from '../views/Register.vue'
 import About from '../views/AboutView.vue'
 import { nextTick } from 'vue'
 import Admin from '../views/Admin.vue'
-
+import PostPreview from '../views/PostPreview.vue'
 import Profile from '../views/Profile.vue'
 const routes = [
   {
@@ -17,6 +17,14 @@ const routes = [
     component: Home,
     meta:{
       title:'Home'
+    }
+  },
+  {
+    path:'/postPreview',
+    name:'PostPreview',
+    component:PostPreview,
+    meta:{
+      title:'Post Preview'
     }
   },
   {

@@ -2,7 +2,7 @@
   <div class="home">
     <Blog :post="welcomeScreen" v-if="!user" />
     <div class="mb-5">
-      <Blog v-for="posts in sampleBlogPost" :key="posts.title" :post="posts" />
+      <Blog v-for="posts in $store.getters.blogPostFeed" :key="posts.title" :post="posts" />
     </div>
     <div class="blogCards flex flex-col justify-center items-center relative text-center">
       <h3 class="font-semibold text-xl tracking-wider mb-5">
@@ -10,7 +10,7 @@
       </h3>
       <div class="mt-5 px-4 gap-y-16 gap-x-7 grid  place-items-center grid-cols-1 md:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2">
         <BlogCard
-          v-for="(post, index) in sampleBlogCards"
+          v-for="(post, index) in blogPostCards"
           :key="index"
           :posts="post"
         />
@@ -39,25 +39,12 @@ export default {
         welcomeScreen: true,
         photo: "coding",
       },
-      sampleBlogPost: [
-        {
-          title: "This is a Filter title",
-          blogHtml: "This is a filter blog post title",
-          photo: "beautiful-stories",
-          rowReverse: true,
-        },
-        {
-          title: "This is a Filter title",
-          blogHtml: "This is a filter blog post title",
-          photo: "designed-for-everyone",
-        },
-      ],
      
     };
   },
   computed:{
-sampleBlogCards(){
-  return this.$store.state.sampleBlogCards
+    blogPostCards(){
+  return this.$store.getters.blogPostCards
 },
 user() {
     return this.$store.state.user

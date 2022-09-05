@@ -1,4 +1,5 @@
 <template>
+    <Loading v-if="loading"/>
   <div v-if="preview">
     <PhotoPreview @closeModal="preview = false" />
   </div>
@@ -157,12 +158,17 @@ import { doc, setDoc, addDoc,  Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // import { ref } from "@vue/reactivity";
 import PhotoPreview from "@/components/PhotoPreview.vue";
+import Loading from "@/components/Loading.vue";
 export default {
+    created(){
+    },
+
   data() {
     return {
       preview: false,
       file: null,
       error: false,
+      loading:false,
       errorMssg: "",
       modules: {
         name: "blotFormatter",
@@ -174,6 +180,9 @@ export default {
     };
   },
   computed: {
+    uniqueID(){
+        return this.uid
+    },
     userId() {
       return this.$store.state.UserId;
     },
@@ -235,6 +244,7 @@ export default {
           this.error = false;
         }, 5000);
       } else {
+        this.loading= true;
         this.error = false;
         const imgRef = ref(
           storage,
@@ -246,31 +256,32 @@ export default {
         }
         ).then(() => {
     getDownloadURL(imgRef).then((downloadURL) => {
-
+let ID = Math.floor((Math.random() * 1234567890 - Math.random() * 5678) )+'' +'ABOOp'
         const docData = {
     blogUrl:downloadURL,
-    blogDate: Timestamp.fromDate(new Date("December 10, 1815")),
+    blogDate: Timestamp.fromDate(new Date(Date.now())),
   blogHtml : this.$store.state.blogHtml,
   blogTitle: this.$store.state.blogTitle,
   blogPhotoName: this.$store.state.blogPhotoName,
-
-  ProfileID:this.userId 
+userName:this.$store.state.userUsername,
+  blogID:this.$store.state.userEmail 
 
 };
- setDoc(doc(db, "Blogs", uniqid ), docData);
+ setDoc(doc(db, "Blogs", ID ), docData);
 
-
-
+this.$router.push('/blogView')
+window.location.reload()
 
 
     })}).catch((err)=>{
+        this.loading=false
             console.log(err);
         })
       }
       
     },
   },
-  components: { PhotoPreview },
+  components: { PhotoPreview, Loading },
 };
 </script>
 

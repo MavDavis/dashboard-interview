@@ -16,13 +16,15 @@
     <div
       class="max-w-sm rounded transform overflow-hidden shadow-lg hover:rotate-2"
     >
-      <img
-        class="w-full"
-        :src="require(`../assets/blogCards/${posts.blogCoverPhoto}.jpg`)"
+   <div class="w-full max-h-36 flex">
+    <img
+        class="object-fit"
+        :src="posts.blogUrl"
       />
+   </div>
       <div class="px-4 py-4">
         <h2 class="flex font-bold text-xl mb-2">{{ posts.blogTitle }}</h2>
-        <h4 class="flex">Posted on: {{ posts.blogDate }}</h4>
+        <h4 class="flex">Posted by: {{ (posts.blogUsername) }}</h4>
       </div>
       <div class="flex justify-start px-4 pt-4 pb-2 w-50 ">
         <router-link class="text-dark font-semibold hover:tracking-wider" to="#"

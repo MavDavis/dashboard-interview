@@ -41,6 +41,8 @@ export default {
       }
   }
 )
+this.$store.commit('getPost')
+
   },
   methods: {
     checkRoute() {

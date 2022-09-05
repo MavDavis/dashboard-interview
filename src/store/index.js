@@ -1,34 +1,16 @@
 import { createStore } from 'vuex'
 import { firebaseAuth } from "../firebase/firebaseInit";
 import { db } from "../firebase/firebaseInit";
-import { collection, getDoc, doc } from "firebase/firestore"; 
+
+import { collection, getDoc, getDocs , doc, query, orderBy, where , onSnapshot} from "firebase/firestore"; 
 import { getFirestore,  setDoc } from "firebase/firestore";
 export default createStore({
   state: {
     editPost:null,
 
-    sampleBlogCards: [
-      {
-        blogTitle: "Blog Card #1",
-        blogCoverPhoto: "stock-1",
-        blogDate: "September 3, 2022",
-      },
-      {
-        blogTitle: "Blog Card #2",
-        blogCoverPhoto: "stock-2",
-        blogDate: "September 3, 2022",
-      },
-      {
-        blogTitle: "Blog Card #3",
-        blogCoverPhoto: "stock-3",
-        blogDate: "September 3, 2022",
-      },
-      {
-        blogTitle: "Blog Card #4",
-        blogCoverPhoto: "stock-4",
-        blogDate: "September 3, 2022",
-      },
-    ],
+   
+    blogPost:[],
+    postLoaded:null,
     blogPhotoName:'',
     blogTitle:'',
     blogHtml:'Write Your blog post here..',
@@ -43,9 +25,38 @@ export default createStore({
     userPassword:''
   },
   getters: {
-    
+    blogPostFeed(state){
+      return state.blogPost.slice(0,2)
+    },
+    blogPostCards(state){
+      return state.blogPost.slice(2,6)
+    }
   },
   mutations: {
+   async getPost(state){
+
+      const citiesRef = query(collection(db, "Blogs"),orderBy("blogDate"))
+      const querySnapshot = await getDocs(citiesRef);
+querySnapshot.forEach((doc) => {
+  if(!state.blogPost.some((post)=>post.blogID === doc.id)){
+  let store= {
+blogId: doc.data().blogID,
+blogUrl :doc.data().blogUrl,
+blogCoverPhoto: doc.data().blogCoverPhoto,
+blogHtml: doc.data().blogHtml,
+blogTitle: doc.data().blogTitle,
+blogId: doc.id,
+blogDate: doc.data().blogDate,
+blogUsername: doc.data().userName,
+
+  };
+  state.blogPost.push(store)
+  console.log(state.blogPost);
+}
+
+});
+state.postLoaded = true
+    },
     changeUserDetails(state){
       const user = firebaseAuth.currentUser
       const docRef = doc(db, "Users", user.uid);

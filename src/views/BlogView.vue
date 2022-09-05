@@ -30,7 +30,7 @@ export default {
     },
     computed:{
 sampleBlogCards(){
-  return this.$store.state.sampleBlogCards
+  return this.$store.state.blogPost
 },
 editPost:{
 get(){

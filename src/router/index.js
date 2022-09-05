@@ -10,6 +10,7 @@ import { nextTick } from 'vue'
 import Admin from '../views/Admin.vue'
 import PostPreview from '../views/PostPreview.vue'
 import Profile from '../views/Profile.vue'
+import ViewBlog from '../views/ViewBlog.vue'
 const routes = [
   {
     path: '/',
@@ -83,6 +84,14 @@ component:Login,
       title:'Login'
     }
   },
+  {
+    path: "/viewBlog/:id",
+    component: ViewBlog,
+    name: "ViewBlog",
+    meta:{
+      title:'BlogDetails'
+    }
+},
   {
     path: '/forgot-Password',
     name: 'ForgotPassword',

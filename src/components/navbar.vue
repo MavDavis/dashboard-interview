@@ -135,14 +135,7 @@
                   <i class="fas text-whit fa-user mr-2"></i>profile
                 </router-link>
               </div>
-              <div
-                @click="showOptions = !showOptions"
-                class="option text-white mb-2 w-full text-white"
-              >
-                <router-link to="/admin">
-                  <i class="fas text-white mr-2 fa"></i>Admin
-                </router-link>
-              </div>
+           
               <div class="option text-white mb-2 w-full">
                 <button @click="logOut()" to="/">
                   <i class="fas text-white mr-2 fa"></i>SignOUt
@@ -303,13 +296,7 @@
                   <i class="fas text-whit fa-user mr-2"></i>profile
                 </router-link>
               </div>
-              <div
-                class="option  mb-2 w-full text-white"
-              >
-                <router-link to="/admin">
-                  <i class="fas text-white mr-2 fa-user"></i>Admin
-                </router-link>
-              </div>
+            
               <div class="option text-white mb-2 w-full">
                 <button @click="logOut()" to="/">
                   <i class="fas text-white mr-2 fa-user"></i>SignOUt

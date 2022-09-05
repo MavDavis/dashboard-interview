@@ -264,8 +264,8 @@ let ID = Math.floor((Math.random() * 1234567890 - Math.random() * 5678) )+'' +'A
   blogTitle: this.$store.state.blogTitle,
   blogPhotoName: this.$store.state.blogPhotoName,
 userName:this.$store.state.userUsername,
-  blogID:this.$store.state.userEmail 
-
+  blogID:this.$store.state.userEmail ,
+editable:false
 };
  setDoc(doc(db, "Blogs", ID ), docData);
 

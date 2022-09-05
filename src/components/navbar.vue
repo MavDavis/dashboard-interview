@@ -29,6 +29,7 @@
             >Home</router-link
           >
           <router-link
+          v-if="user"
             class="button font-semibold ml-6 hover:text-green"
             :to="{ name: 'CreateBlog' }"
             >Create Post</router-link

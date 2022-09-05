@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import { firebaseAuth } from "../firebase/firebaseInit";
 import { db } from "../firebase/firebaseInit";
 
-import { collection, getDoc, getDocs , doc, query, orderBy, where , onSnapshot} from "firebase/firestore"; 
+import { collection, getDoc, getDocs , doc, query, orderBy, deleteDoc, where , onSnapshot} from "firebase/firestore"; 
 import { getFirestore,  setDoc } from "firebase/firestore";
 export default createStore({
   state: {
@@ -40,7 +40,7 @@ export default createStore({
 querySnapshot.forEach((doc) => {
   if(!state.blogPost.some((post)=>post.blogID === doc.id)){
   let store= {
-blogId: doc.data().blogID,
+blogEmail: doc.data().blogID,
 blogUrl :doc.data().blogUrl,
 blogCoverPhoto: doc.data().blogCoverPhoto,
 blogHtml: doc.data().blogHtml,
@@ -48,10 +48,9 @@ blogTitle: doc.data().blogTitle,
 blogId: doc.id,
 blogDate: doc.data().blogDate,
 blogUsername: doc.data().userName,
-
+blogEditable: doc.data().editable
   };
   state.blogPost.push(store)
-  console.log(state.blogPost);
 }
 
 });
@@ -74,6 +73,10 @@ state.postLoaded = true
 .catch(error => {
     console.log(error);
 })
+    },
+    async deletePost(state, payload){
+      await deleteDoc(doc(db, "Blogs", payload));
+      state.blogPost = state.blogPost.filter(item => item.blogId != payload)
     },
     toggleEditPost(state, payload){
     state.editPost = payload

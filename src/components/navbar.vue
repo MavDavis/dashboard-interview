@@ -197,7 +197,7 @@
           >
             <div @click="toggleMobileScreenOpened" class="my-7 ">
               <router-link
-                class="button my-6 hover:text-green text-3xl font-semibold tracking-wider"
+                class="button my-6 hover:text-green text-2xl font-semibold tracking-wider"
                 :to="{ name: 'Home' }"
                 >Home</router-link
               >
@@ -206,14 +206,14 @@
               <router-link
               v-if="user"
 
-                class="button hover:text-green text-3xl font-semibold tracking-wider"
+                class="button hover:text-green text-2xl font-semibold tracking-wider"
                 :to="{ name: 'CreateBlog' }"
                 >Create Post</router-link
               >
             </div>
             <div @click="toggleMobileScreenOpened" class="my-7 ">
               <router-link
-                class="button my-6 hover:text-green text-3xl font-semibold tracking-wider"
+                class="button my-6 hover:text-green text-2xl font-semibold tracking-wider"
                 :to="{ name: 'BlogView' }"
                 >Blog</router-link
               >
@@ -221,7 +221,7 @@
             <div @click="toggleMobileScreenOpened" class="my-10 ">
               <router-link
                 v-if="!user"
-                class="button hover:text-green text-3xl font-semibold tracking-wider"
+                class="button hover:text-green text-2xl font-semibold tracking-wider"
                 :to="{ name: 'Login' }"
                 >login/SignUp</router-link
               >

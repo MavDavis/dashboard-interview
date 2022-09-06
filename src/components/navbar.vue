@@ -174,9 +174,9 @@
           class="flex w-full justify-end items-center button"
           @click="toggleMobileScreenOpened"
         >
-          <i v-if="!mobileScreenOpened" class="fas fa-bars"></i>
+          <i v-if="!mobileScreenOpened" class="text-2xl fas fa-bars"></i>
 
-          <i v-if="mobileScreenOpened" class="fas fa-times"></i>
+          <i v-if="mobileScreenOpened" class="text-2xl fas fa-times"></i>
         </div>
         <transition name="mobile-nav">
           <div

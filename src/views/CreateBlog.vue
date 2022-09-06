@@ -262,7 +262,7 @@ let ID = Math.floor((Math.random() * 1234567890 - Math.random() * 5678) )+'' +'A
     blogDate: Timestamp.fromDate(new Date(Date.now())),
   blogHtml : this.$store.state.blogHtml,
   blogTitle: this.$store.state.blogTitle,
-  blogPhotoName: this.$store.state.blogPhotoName,
+  blogCoverPhoto: this.$store.state.blogPhotoName,
 userName:this.$store.state.userUsername,
   blogID:this.$store.state.userEmail ,
 editable:false

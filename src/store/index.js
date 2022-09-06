@@ -59,6 +59,29 @@ blogEditable: doc.data().editable
 });
 state.postLoaded = true
     },
+    async editPost(state){
+
+      const citiesRef = query(collection(db, "Blogs"),orderBy("blogDate"))
+      const querySnapshot = await getDocs(citiesRef);
+querySnapshot.forEach((doc) => {
+  let store= {
+blogEmail: doc.data().blogID,
+blogUrl :doc.data().blogUrl,
+blogCoverPhoto: doc.data().blogCoverPhoto,
+blogHtml: doc.data().blogHtml,
+blogTitle: doc.data().blogTitle,
+blogId: doc.id,
+blogDate: doc.data().blogDate,
+blogUsername: doc.data().userName,
+blogEditable: doc.data().editable
+  };
+
+    state.blogPost.push(store)
+
+
+});
+state.postLoaded = true
+    },
     changeUserDetails(state){
       const user = firebaseAuth.currentUser
       const docRef = doc(db, "Users", user.uid);
@@ -76,6 +99,15 @@ state.postLoaded = true
 .catch(error => {
     console.log(error);
 })
+    },
+    setCurrent(state, payload){
+      console.log(payload);
+      state.blogHtml = payload.blogHtml
+
+      state.blogId = payload.blogId
+      state.blogTitle = payload.blogTitle
+      state.blogPhotoFileUrl = payload.blogUrl
+      state.blogPhotoName = payload.blogCoverPhoto
     },
     async deletePost(state, payload){
       await deleteDoc(doc(db, "Blogs", payload));

@@ -116,7 +116,7 @@
     </div>
     <div class="flex iems-center justify-start mt-4">
       <button
-        @click="uploadBlog()"
+        @click="updateBlog()"
         class="
           ml-3
           hover:tracking-wider
@@ -128,8 +128,7 @@
           tracking-wide
         "
       >
-        Publish Blog
-      </button>
+Save Changes      </button>
       <router-link
         :to="{ name: 'PostPreview' }"
         class="
@@ -142,29 +141,39 @@
           text-white text-sm
           tracking-wide
         "
-        >Post Preview</router-link
+        > Preview Changes</router-link
       >
     </div>
   </div>
 </template>
 
 <script>
+      import { firebaseAuth } from "../firebase/firebaseInit";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import BlotFormatter from "quill-blot-formatter";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 import { storage } from "../firebase/firebaseInit";
 import { db } from "../firebase/firebaseInit";
-import { doc, setDoc, addDoc,  Timestamp } from "firebase/firestore";
+import { doc, setDoc, updateDoc ,  Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // import { ref } from "@vue/reactivity";
 import PhotoPreview from "@/components/PhotoPreview.vue";
 import Loading from "@/components/Loading.vue";
 export default {
-    created(){
-    },
 
+async mounted(){
+
+    this.postId = this.$route.params.id;
+    this.item = await  this.$store.state.blogPost.find((item =>item.blogId == this.postId))
+this.$store.commit('setCurrent', this.item)
+ 
+
+},
   data() {
     return {
+      item:null,
+    postId: null,
       preview: false,
       file: null,
       error: false,
@@ -207,6 +216,7 @@ export default {
     },
   },
   methods: {
+ 
     FileChanged() {
       this.file = this.$refs.blogPhoto.files[0];
       const filename = this.file.name;
@@ -217,27 +227,8 @@ export default {
       this.preview = true;
       console.log("hy");
     },
-    uploadBlog() {
-      if (this.$store.state.blogHtml.length < 0) {
-        this.error = true;
-        this.errorMssg = "Please, enter a Post body ";
-
-        setTimeout(() => {
-          this.error = false;
-          this.errorMssg = " ";
-        }, 5000);
-
-        return;
-      } else if (this.$store.state.blogTitle.length < 0 ) {
-        this.error = true;
-        this.errorMssg = "Please, enter a Post Title ";
-
-        setTimeout(() => {
-          this.error = false;
-          this.errorMssg = " ";
-        }, 5000);
-
-      } else if (this.file == null) {
+    updateBlog() {
+if (this.file == null) {
         this.error = true;
         this.errorMssg = "Please, enter a Post Image ";
         setTimeout(() => {
@@ -262,15 +253,15 @@ let ID = Math.floor((Math.random() * 1234567890 - Math.random() * 5678) )+'' +'A
     blogDate: Timestamp.fromDate(new Date(Date.now())),
   blogHtml : this.$store.state.blogHtml,
   blogTitle: this.$store.state.blogTitle,
-  blogPhotoName: this.$store.state.blogPhotoName,
+  blogCoverPhoto: this.$store.state.blogPhotoName,
 userName:this.$store.state.userUsername,
   blogID:this.$store.state.userEmail ,
 editable:false
 };
- setDoc(doc(db, "Blogs", ID ), docData);
+updateDoc(doc(db, "Blogs", this.$store.state.blogId ), docData);
+this.$store.commit('editPost')
 
 this.$router.push('/blogView')
-window.location.reload()
 
 
     })}).catch((err)=>{

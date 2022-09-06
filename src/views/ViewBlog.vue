@@ -17,7 +17,6 @@ export default {
             item:''
         }
     },
-//{this.$route.params.id}
 mounted(){
    let foundItem = this.$store.state.blogPost.find(item => item.blogId == this.$route.params.id)
 this.item = (foundItem);

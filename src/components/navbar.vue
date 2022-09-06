@@ -204,6 +204,8 @@
             </div>
             <div @click="toggleMobileScreenOpened" class="my-10 ">
               <router-link
+              v-if="user"
+
                 class="button hover:text-green text-3xl font-semibold tracking-wider"
                 :to="{ name: 'CreateBlog' }"
                 >Create Post</router-link

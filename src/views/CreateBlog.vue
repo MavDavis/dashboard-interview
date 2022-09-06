@@ -114,7 +114,7 @@
         contentType="html"
       />
     </div>
-    <div class="flex iems-center justify-start mt-4">
+    <div class="flex iems-center justify-start mt-4 mb-5">
       <button
         @click="uploadBlog()"
         class="

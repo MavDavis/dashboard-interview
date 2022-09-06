@@ -97,6 +97,7 @@ export default {
       this.$store.commit("deletePost", payload)
         this.loading = false;
     },
+   
   },
   components: { Loading },
 };

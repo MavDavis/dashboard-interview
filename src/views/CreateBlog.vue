@@ -114,7 +114,7 @@
         contentType="html"
       />
     </div>
-    <div class="flex iems-center justify-start mt-4 mb-5">
+    <div class="flex iems-center justify-start mt-4 sm:mb-2 mb-11">
       <button
         @click="uploadBlog()"
         class="
@@ -122,7 +122,10 @@
           hover:tracking-wider
           rounded-full
           py-2
+          flex
           px-3
+          text-center
+
           bg-dark
           text-white text-sm
           tracking-wide
@@ -138,6 +141,8 @@
           rounded-full
           py-2
           px-3
+          flex
+          text-center
           bg-dark
           text-white text-sm
           tracking-wide

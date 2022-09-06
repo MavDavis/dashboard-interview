@@ -20,7 +20,7 @@
       <h2 class="font-semibold text-2xl tracking-wider relative text-center sm:text-start">
         Never miss a post. Register for your free account today!
       </h2>
-      <router-link to="#" class=" flex items-center justify-center md:w-1/4 relative bg-dark text-white rounded-full py-2 px-3 my-5 hover:tracking-wider   ">Register for Mavs-Blogs <i class="fas fa-arrow-right text-sm ml-2"></i></router-link>
+      <router-link to="/register" class=" flex items-center justify-center md:w-1/4 relative bg-dark text-white rounded-full py-2 px-3 my-5 hover:tracking-wider   ">Register for Mavs-Blogs <i class="fas fa-arrow-right text-sm ml-2"></i></router-link>
     </div>
   </div>
 </template>

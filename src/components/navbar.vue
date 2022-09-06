@@ -195,7 +195,7 @@
               px-4
             "
           >
-            <div @click="toggleMobileScreenOpened" class="my-10 ">
+            <div @click="toggleMobileScreenOpened" class="my-7 ">
               <router-link
                 class="button my-6 hover:text-green text-3xl font-semibold tracking-wider"
                 :to="{ name: 'Home' }"
@@ -211,7 +211,7 @@
                 >Create Post</router-link
               >
             </div>
-            <div @click="toggleMobileScreenOpened" class="my-10 ">
+            <div @click="toggleMobileScreenOpened" class="my-7 ">
               <router-link
                 class="button my-6 hover:text-green text-3xl font-semibold tracking-wider"
                 :to="{ name: 'BlogView' }"

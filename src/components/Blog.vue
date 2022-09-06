@@ -28,7 +28,7 @@
     <div class="w-full md:w-1/2 lg:w-1/2 px-5 " :class="{'bg-dark':post.welcomeScreen}">
       <img v-if="post.welcomeScreen"
         class="object-fill h-full w-full ..."
-        src="../assets/blogPhotos/designed-for-everyone.png"
+        src="../assets/blogPhotos/coding.png"
       />
       <img v-else
         class="object-fill h-full w-full px-5"

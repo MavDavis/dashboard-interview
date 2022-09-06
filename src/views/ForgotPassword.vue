@@ -111,7 +111,7 @@ sendPasswordResetEmail(auth, this.email)
 
 <style lang="scss" scoped>
    .bg-img{
-        background: url('../assets/background.png');
+        background: url('../assets/background.jpg');
       background-size: cover;
 background-position: center;    
 

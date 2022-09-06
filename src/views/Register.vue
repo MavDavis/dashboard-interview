@@ -142,19 +142,7 @@
             />
           </div>
           <div class="flex flex-col items-center justify-between">
-            <router-link
-              :to="{ name: 'ForgotPassword' }"
-              class="
-                mb-5
-                inline-block
-                align-baseline
-                font-bold
-                text-sm text-dark
-                hover:tracking-wider
-              "
-            >
-              Forgot Password?
-            </router-link>
+           
             <button
               class="
                 bg-dark
@@ -169,7 +157,7 @@
               type="button"
               @click="Submit()"
             >
-              Sign In
+             Create account
             </button>
           </div>
         </form>

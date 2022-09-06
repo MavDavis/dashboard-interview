@@ -36,7 +36,7 @@
                 <i class="fas fa-instagram text-xs  hover:text-green"></i>
               </button>
               <button class="mr-6">
-                <i class="fas fa-github text-xs  hover:text-green"></i>
+                <i class="fa fa-github text-xs  hover:text-green"></i>
               </button>
               <button class=""><i class="fa fa-linkedin text-xs  hover:text-green"></i></button>
             </div>

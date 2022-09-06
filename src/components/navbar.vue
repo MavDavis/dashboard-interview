@@ -202,7 +202,7 @@
                 >Home</router-link
               >
             </div>
-            <div @click="toggleMobileScreenOpened" class="my-10 ">
+            <div @click="toggleMobileScreenOpened" class=" ">
               <router-link
               v-if="user"
 

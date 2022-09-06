@@ -11,6 +11,8 @@ import Admin from '../views/Admin.vue'
 import PostPreview from '../views/PostPreview.vue'
 import Profile from '../views/Profile.vue'
 import ViewBlog from '../views/ViewBlog.vue'
+import EditBlog from '../views/EditBlog.vue'
+
 const routes = [
   {
     path: '/',
@@ -18,6 +20,14 @@ const routes = [
     component: Home,
     meta:{
       title:'Home'
+    }
+  },
+  {
+    path: '/editBlog/:id',
+    name: 'EditBlog',
+    component: EditBlog,
+    meta:{
+      title:'EditBlog'
     }
   },
   {

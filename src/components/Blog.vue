@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex  relative top-10 mb-11 flex-col sm:justify-center justify-start parent sm:flex-row" :class="[
+  <div class="w-full flex  relative top-10 mb-11 flex-col sm:justify-center justify-start parent md:flex-row" :class="[
     post.welcomeScreen?'py-0':'py-4 sm:py-11'
       ]">
     <div
@@ -56,5 +56,7 @@ export default {
 }
 .parent:nth-child(1){
 flex-direction: row-reverse;
+@media (max-width:576px) {
+    flex-direction: column;}
 }
 </style>

@@ -38,7 +38,6 @@ export default createStore({
       const citiesRef = query(collection(db, "Blogs"),orderBy("blogDate"))
       const querySnapshot = await getDocs(citiesRef);
 querySnapshot.forEach((doc) => {
-  if(!state.blogPost.some((post)=>post.blogID === doc.id)){
   let store= {
 blogEmail: doc.data().blogID,
 blogUrl :doc.data().blogUrl,
@@ -50,9 +49,13 @@ blogDate: doc.data().blogDate,
 blogUsername: doc.data().userName,
 blogEditable: doc.data().editable
   };
-  state.blogPost.push(store)
-}
+  let res = state.blogPost.find((item) => item.blogId == store.blogId);
+  if (res === undefined) {
+    state.blogPost.push(store)
 
+  }else{
+    return state.blogPost
+  }
 });
 state.postLoaded = true
     },

@@ -33,6 +33,10 @@ this.email= (user.email);
   })
   this.post = (this.getPostFromStore);
 },
+mounted(){
+   
+
+},
     data(){
         return{
 email:null,
@@ -46,8 +50,9 @@ clickedonEdit:null
     methods:{
       
         editPost(){
-            this.clickedonEdit = true
-let filter = this.post.filter(item => item.blogEmail != this.email)
+            this.clickedonEdit = !this.clickedonEdit
+let filter = this.post.filter(item => item.blogEmail.toLowerCase() == this.email.toLowerCase())
+
 filter.forEach(item=>{
     item.blogEditable = !item.blogEditable
 })

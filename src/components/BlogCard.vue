@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading"/>
   <div class="relative max-w-sm rounded transform overflow-hidden shadow-lg hover:rotate-2"
 >
     <div class="absolute w-full h-3/4 px-4 flex items-start justify-end z-10  " v-if="posts.blogEditable">
@@ -14,11 +15,11 @@
       </div>
     </div>
     <div
-      class="max-w-sm rounded transform overflow-hidden shadow-lg hover:rotate-2"
+      class="max-w-sm w-fit rounded transform overflow-hidden shadow-lg hover:rotate-2"
     >
-   <div class="w-full max-h-36 flex">
+   <div class="max-w-full max-h-36 w-full flex">
     <img
-        class="object-fit"
+        class="object-fit flex w-80"
         :src="posts.blogUrl"
       />
    </div>
@@ -36,16 +37,27 @@
 </template>
 
 <script>
+import Loading from './Loading.vue';
 
 export default {
-  name: "BlogCard",
-  props: ["posts"],
-  methods:{
-    deletePost(payload){
-            this.$store.commit('deletePost', payload)
-        },
+    name: "BlogCard",
+    data(){
+      return{
+        loading:false
+      }
+    },
+    props: ["posts"],
+    methods: {
+        deletePost(payload) {
+          this.loading= true
 
-  }
+           this.$store.commit("deletePost", payload).then(()=>{
+            this.loading = false
+           })
+
+        },
+    },
+    components: { Loading }
 }
 </script>
 

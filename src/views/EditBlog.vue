@@ -268,9 +268,9 @@ userName:this.$store.state.userUsername,
 editable:false
 };
  setDoc(doc(db, "Blogs", ID ), docData);
- this.$store.commit('getPost')
 
- this.$router.push('/blogView')
+this.$router.push('/blogView')
+window.location.reload()
 
 
     })}).catch((err)=>{
@@ -278,7 +278,7 @@ editable:false
             console.log(err);
         })
       }
- 
+      
     },
   },
   components: { PhotoPreview, Loading },

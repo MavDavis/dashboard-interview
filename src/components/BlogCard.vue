@@ -1,6 +1,7 @@
 <template>
   <Loading v-if="loading" />
   <div
+  @click="pushToView(posts.blogId)"
     class="
       relative
       max-w-sm
@@ -97,7 +98,10 @@ export default {
       this.$store.commit("deletePost", payload)
         this.loading = false;
     },
-   
+   pushToView(payload){
+    this.$router.push(`/viewBlog/` + payload)
+
+   }
   },
   components: { Loading },
 };

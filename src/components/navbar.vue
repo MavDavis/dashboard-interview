@@ -381,10 +381,10 @@ export default {
   transition: all 1s ease;
 }
 .mobile-nav-enter {
-  transform: translateX(0);
+  transform: translateX(0px);
 }
 .mobile-nav-enter-to {
-  transform: translateX(100px);
+  transform: translateX(0px);
 }
 .mobile-nav-leave-to {
   transform: translateX(-250px);

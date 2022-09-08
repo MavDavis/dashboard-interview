@@ -5,7 +5,6 @@ import ForgotPassword from '../views/ForgotPassword'
 import CreateBlog from '../views/CreateBlog.vue'
 import BlogView from '../views/BlogView.vue'
 import Register from '../views/Register.vue'
-import About from '../views/AboutView.vue'
 import { nextTick } from 'vue'
 import Admin from '../views/Admin.vue'
 import PostPreview from '../views/PostPreview.vue'
@@ -38,14 +37,7 @@ const routes = [
       title:'Post Preview'
     }
   },
-  {
-    path: '/about',
-    name: 'About',
-component:About,
-    meta:{
-      title:'About'
-    }
-  },
+  
   {
     path: '/admin',
     name: 'Admin',

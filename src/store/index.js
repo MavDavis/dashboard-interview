@@ -1,14 +1,12 @@
 import { createStore } from 'vuex'
 import { firebaseAuth } from "../firebase/firebaseInit";
 import { db } from "../firebase/firebaseInit";
-
+/**/ 
 import { collection, getDoc, getDocs , doc, query, orderBy, deleteDoc, where , onSnapshot} from "firebase/firestore"; 
 import { getFirestore,  setDoc } from "firebase/firestore";
 export default createStore({
   state: {
     editPost:null,
-
-   
     blogPost:[],
     postLoaded:null,
     blogPhotoName:'',

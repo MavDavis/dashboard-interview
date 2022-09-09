@@ -1,5 +1,8 @@
 <template>
     <div class="container relative top-20 mb-24" v-if="$store.state.postLoaded">
+        <div class="flex justify-left items-center">
+            <router-link to="/"><i class="fas fa-arrow-left text-dark text-lg hover:text-2xl"></i></router-link>
+        </div>
       <div class="flex flex-col w-full min-h-screen h-fit px-5 ">
   
   <img :src="item.blogUrl" alt="" class=" mb-4 rounded-lg object-fit">

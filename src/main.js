@@ -1,9 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './assets/tailwind.css'
-import { QuillEditor } from '@vueup/vue-quill'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "./assets/tailwind.css";
 
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-createApp(App).component('QuillEditor', QuillEditor).use(store).use(router).mount('#app')
+createApp(App).use(store).use(router).mount("#app");

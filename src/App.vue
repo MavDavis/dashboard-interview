@@ -1,17 +1,21 @@
 <template>
-  <div class="app-wrapper">
-
+  <div class="app-wrapper app py-12 sm:px-16 px-4">
+<Header/>
+<Body/>
   </div>
 </template>
 
 <script>
   
+  import  Header from "./Components/Header.vue";
+  import Body from './Components/Body/index.vue'
 export default {
   name: "app",
   data() {
     return {
     };
   },
+  components:{Header, Body},
   created() {
   
   },
@@ -38,31 +42,27 @@ export default {
   font-family: "Quicksand", sans-serif;
   transition: 0.4s ease;
 }
-
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #D9D5EC;
+  border-radius: 40px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 .app {
-  display: flex;
-  flex-direction: column;
+  background: #E5E5E5;
   min-height: 100vh;
+overflow: hidden;
 }
 .app-wrapper {
   scroll-behavior: smooth;
 }
 
-// .container {
-//   max-width: 1440px;
-//   margin: 0 auto;
-// }
-
-// .link {
-//   cursor: pointer;
-//   text-decoration: none;
-//   text-transform: uppercase;
-//   color: black;
-// }
-
-// .link-light {
-//   color: #fff;
-// }.
 .router-link-active{
   color:#1DB954;
 }

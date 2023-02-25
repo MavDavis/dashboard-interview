@@ -15,15 +15,20 @@ module.exports = {
         center:true
       },
         extend: {
-       
-          // colors:{
-          //   'green':'#1DB954',
-    
-          //   'dark':'#121212',
-          //   'light':'#282828',
-          //   'lightest':'#ccc',
-          //   'darkest':'#191414'
-          // }
+          width: {
+            40: '40%',
+            20: '20%',
+            25:'25%',
+            15:'15%',
+            10:'10%',
+            50: '50%',
+           30:'30%'
+          },
+          colors:{
+            'purple-light':'#c6c2de',
+            'purple-dim':'#D9D5EC',
+            'purple-lighter':'#F4F2FF'
+          }
         },
     
     },

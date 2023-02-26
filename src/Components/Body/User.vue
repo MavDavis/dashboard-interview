@@ -135,7 +135,7 @@
   >
     <div class="w-3/5 flex items-center"></div>
     <p>Rows per page 10</p>
-    <p class="mx-10">{{ this.currentItems - 9 }}-{{ this.currentItems }} 0f 50</p>
+    <p class="mx-10">{{ this.currentItems +1  }}-{{ this.currentItems + 10}} 0f 50</p>
     <div class="flex justify-between w-24 text-lg">
       <i
         class="fas fa-chevron-left cursor-pointer ml-1 hover:ml-0"

@@ -1646,7 +1646,12 @@ export default createStore({
       state.showModal = !state.showModal;
     },
     searchFunction(state) {
-   
+      let searchInput = state.searchInput;
+
+      if (searchInput.length > 0) {
+return      } else {
+        state.users = state.secondUsers;
+      }
     },
   },
   actions: {  
@@ -1654,17 +1659,13 @@ export default createStore({
     let searchInput = state.searchInput;
     const filteredUsers = state.users.filter((user) => {
       const { firstname, lastname, gmail } = user;
+    const userDetails = (`${firstname} ${lastname} ${gmail}`  );
+
       return (
-        firstname.toLowerCase().includes(searchInput.toLowerCase()) ||
-        lastname.toLowerCase().includes(searchInput.toLowerCase()) ||
-        gmail.toLowerCase().includes(searchInput.toLowerCase()) ||
-        (firstname + lastname)
-          .toLowerCase()
-          .includes(searchInput.toLowerCase())
-      );
+        userDetails.toLowerCase().includes(searchInput.toLowerCase())
+      )
     });
     if(searchInput.length > 0){
-      console.log(searchInput);
       state.users = filteredUsers
     }else{
       state.users = state.secondUsers
@@ -1673,5 +1674,10 @@ export default createStore({
     // ...
   }, 500)
 },
+
+
+
+
+
   modules: {},
 });

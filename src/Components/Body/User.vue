@@ -137,8 +137,14 @@
     <p>Rows per page 10</p>
     <p class="mx-10">{{ page }} 0f 50</p>
     <div class="flex justify-between w-24 text-lg">
-      <i class="fas fa-chevron-left cursor-pointer ml-1 hover:ml-0" @click="movePage('decrease')"></i>
-      <i class="fas fa-chevron-right cursor-pointer mr-1 hover:mr-0" @click="movePage('increase')"></i>
+      <i
+        class="fas fa-chevron-left cursor-pointer ml-1 hover:ml-0"
+        @click="movePage('decrease')"
+      ></i>
+      <i
+        class="fas fa-chevron-right cursor-pointer mr-1 hover:mr-0"
+        @click="movePage('increase')"
+      ></i>
     </div>
   </div>
 </template>
@@ -172,19 +178,21 @@ export default {
   },
   methods: {
     movePage(method) {
+      let arrayLength = this.$store.state.users.length;
+      let arrayCheck = this.currentItems;
       if (method === "decrease") {
-        if (this.currentItems <= 11) {
-          return;
+        if (arrayCheck !== 0 && arrayCheck !== 10) {
+          this.currentItems = arrayCheck - 10;
+          console.log(this.currentItems, this.$store.state.users.length);
         } else {
-          this.currentItems - 10;
+          return;
         }
       }
       if (method === "increase") {
-        if (this.currentItems >=10 && this.currentItems <= this.$store.state.users.length) {
-          this.currentItems + 10;
-          console.log(this.currentItems);
+        if (arrayCheck !== arrayLength - 10) {
+          this.currentItems = arrayCheck + 10;
         } else {
-          return
+          return;
         }
       }
     },

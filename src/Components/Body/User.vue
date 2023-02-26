@@ -183,7 +183,6 @@ export default {
       if (method === "decrease") {
         if (arrayCheck !== 0 && arrayCheck !== 10) {
           this.currentItems = arrayCheck - 10;
-          console.log(this.currentItems, this.$store.state.users.length);
         } else {
           return;
         }

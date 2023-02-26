@@ -1577,7 +1577,7 @@ export default createStore({
     },
     sortBy(state, payload) {
       if (payload === "active") {
-        state.users = state.users.sort((a, b) => {
+        state.users = state.secondUsers.sort((a, b) => {
           if (a.status && !b.status) {
             return -1;
           } else if (!a.status && b.status) {
@@ -1587,13 +1587,13 @@ export default createStore({
           }
         });
       } else if (payload === "inactive") {
-        state.users = state.users.sort((a, b) =>
+        state.users = state.secondUsers.sort((a, b) =>
           a.status === b.status ? 0 : a.status ? 1 : -1
         );
       } else if (payload === "all") {
         state.users = state.secondUsers;
       } else if (payload === "lastname") {
-        state.users = state.users.sort((a, b) => {
+        state.users = state.secondUsers.sort((a, b) => {
           const nameA = a.lastname.toUpperCase();
           const nameB = b.lastname.toUpperCase();
           if (nameA < nameB) {
@@ -1605,7 +1605,7 @@ export default createStore({
           return 0;
         });
       } else if (payload === "firstname") {
-        state.users = state.users.sort((a, b) => {
+        state.users = state.secondUsers.sort((a, b) => {
           const nameA = a.firstname.toUpperCase();
           const nameB = b.firstname.toUpperCase();
           if (nameA < nameB) {
@@ -1617,7 +1617,7 @@ export default createStore({
           return 0;
         });
       } else if (payload === "duedate") {
-        state.users = state.users.sort((a, b) => {
+        state.users = state.secondUsers.sort((a, b) => {
           if (a.dueDate < b.dueDate) {
             return -1;
           }
@@ -1627,7 +1627,7 @@ export default createStore({
           return 0;
         });
       } else if (payload === "laslogin") {
-        state.users = state.users.sort((a, b) => {
+        state.users = state.secondUsers.sort((a, b) => {
           if (a.lastLogin < b.lastLogin) {
             return -1;
           }

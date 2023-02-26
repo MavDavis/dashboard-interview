@@ -2,14 +2,12 @@
   <div class="header flex w-full relative">
     <div class="w-full relative flex flex-col">
       <h1 class="table-header">table-heading</h1>
-      <div class="flex w-full justify-between py-2 give-border">
+      <div class="flex w-full justify-between  give-border">
         <div class="buttons flex items-center">
-          <button class="button">All</button>
-          <button class="button mx-3">Paid</button>
-          <button class="button">Unpaid</button>
-          <button class="button mx-3">Overdue</button>
+          <button v-for="button in buttons" @click="toggleActive(button.name)" class="button py-2 hover:border-b   border-black h-full" :class ="[button.active? 'active' :'']">{{ button.name }}</button>
+         
         </div>
-        <div class="flex sm:flex-row flex-col text items-center">
+        <div class="flex sm:flex-row flex-col text items-center py-2">
           <p>Total payable amount:</p>
           <h3 class="font-extrabold mx-2 text-xl">{{$store.state.sum}}</h3>
           <p class="text-xl">USD</p>
@@ -23,13 +21,20 @@
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      buttons:[{name:'All', active:true}, {name:'Paid', active:false}, {name:'Unpaid', active:false}, {name:'Overdue', active:false}]
+    };
   },
   created() {
     this.$store.commit('getSum')
   },
   mounted() {},
-  methods: {},
+  methods: {
+    toggleActive(name){
+     this.buttons =  this.buttons.map(button=>button.name === name ? {...button, active:true} :{...button, active:false})
+     this.$store.commit('filterByButtonName', name)
+    }
+  },
   watch: {},
 };
 </script>
@@ -63,4 +68,10 @@ export default {
 button:hover{
     color:black ;
 }
+.active{
+  border-bottom: 1px solid black;
+}
+button:nth-last-child(2), button:nth-last-child(4){
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;}
 </style>

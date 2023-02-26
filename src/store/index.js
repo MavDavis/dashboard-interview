@@ -1,12 +1,14 @@
 import { createStore } from "vuex";
+import { debounce } from 'lodash';
 
 export default createStore({
   state: {
-    sum:null,
+    sum: null,
     users: [
       {
         id: 1,
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Samson",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
@@ -14,6 +16,8 @@ export default createStore({
         overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -33,7 +37,8 @@ export default createStore({
       },
       {
         id: 2,
-        name: "George Mary",
+        firstname: "George ",
+        lastname: "Mary",
         gmail: "mary@gmail,com",
         status: false,
         paid: false,
@@ -41,6 +46,8 @@ export default createStore({
         overdue: false,
         amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -60,7 +67,8 @@ export default createStore({
       },
       {
         id: 3,
-        name: "Steeve Mike",
+        firstname: "Steeve",
+        lastname: "Okoye",
         gmail: "mike@gmail,com",
         status: false,
         paid: false,
@@ -68,6 +76,8 @@ export default createStore({
         overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -87,13 +97,16 @@ export default createStore({
       },
       {
         id: 4,
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Oius",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
         unpaid: false,
         overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -114,14 +127,17 @@ export default createStore({
       },
       {
         id: 5,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
         status: true,
         paid: true,
         unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -141,14 +157,17 @@ export default createStore({
       },
       {
         id: 6,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
+        firstname: "Bina ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
         status: false,
-        paid: true,
-        unpaid: false,
+        paid: false,
+        unpaid: true,
         overdue: false,
-        amount: 500,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -168,15 +187,17 @@ export default createStore({
       },
       {
         id: 7,
-
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
+        firstname: "Steeve",
+        lastname: "Wike",
+        gmail: "mike@gmail,com",
+        status: false,
         paid: false,
-        unpaid: true,
-        overdue: false,
+        unpaid: false,
+        overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -196,13 +217,16 @@ export default createStore({
       },
       {
         id: 8,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: " Oius",
+        lastname: "Tunde",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -223,14 +247,17 @@ export default createStore({
       },
       {
         id: 9,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -250,15 +277,17 @@ export default createStore({
       },
       {
         id: 10,
-
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
-        unpaid: false,
+        firstname: "George ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
+        status: false,
+        paid: false,
+        unpaid: true,
         overdue: false,
-        amount: 200,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -278,14 +307,17 @@ export default createStore({
       },
       {
         id: 11,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
-        status: true,
+        firstname: "Tosin",
+        lastname: "Okoye",
+        gmail: "mike@gmail,com",
+        status: false,
         paid: false,
-        unpaid: true,
-        overdue: false,
-        amount: 300,
+        unpaid: false,
+        overdue: true,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -305,13 +337,16 @@ export default createStore({
       },
       {
         id: 12,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Toyin",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -332,8 +367,8 @@ export default createStore({
       },
       {
         id: 13,
-
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Samson",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
@@ -341,6 +376,8 @@ export default createStore({
         overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -360,14 +397,17 @@ export default createStore({
       },
       {
         id: 14,
-        name: "George Mary",
+        firstname: "George ",
+        lastname: "Mary",
         gmail: "mary@gmail,com",
-        status: true,
+        status: false,
         paid: false,
         unpaid: true,
         overdue: false,
         amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -387,7 +427,8 @@ export default createStore({
       },
       {
         id: 15,
-        name: "Steeve Mike",
+        firstname: "Steeve",
+        lastname: "Braden",
         gmail: "mike@gmail,com",
         status: false,
         paid: false,
@@ -395,6 +436,8 @@ export default createStore({
         overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -414,14 +457,16 @@ export default createStore({
       },
       {
         id: 16,
-
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Pius",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
         unpaid: false,
         overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -442,14 +487,17 @@ export default createStore({
       },
       {
         id: 17,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -469,14 +517,17 @@ export default createStore({
       },
       {
         id: 18,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
+        firstname: "George ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
         status: false,
         paid: false,
-        unpaid: false,
-        overdue: true,
-        amount: 200,
+        unpaid: true,
+        overdue: false,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -496,15 +547,17 @@ export default createStore({
       },
       {
         id: 19,
-
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
+        firstname: "Steeve",
+        lastname: "Prisma",
+        gmail: "mike@gmail,com",
+        status: false,
+        paid: false,
         unpaid: false,
-        overdue: false,
+        overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -524,13 +577,16 @@ export default createStore({
       },
       {
         id: 20,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: " Oius",
+        lastname: "Oius",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -551,14 +607,17 @@ export default createStore({
       },
       {
         id: 21,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -578,15 +637,17 @@ export default createStore({
       },
       {
         id: 22,
-
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
-        unpaid: false,
+        firstname: "Spectre ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
+        status: false,
+        paid: false,
+        unpaid: true,
         overdue: false,
-        amount: 200,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -606,14 +667,17 @@ export default createStore({
       },
       {
         id: 23,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
-        status: true,
+        firstname: "Steeve",
+        lastname: "Okoye",
+        gmail: "mike@gmail,com",
+        status: false,
         paid: false,
-        unpaid: true,
-        overdue: false,
-        amount: 300,
+        unpaid: false,
+        overdue: true,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -633,13 +697,16 @@ export default createStore({
       },
       {
         id: 24,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Bisnja",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -660,15 +727,17 @@ export default createStore({
       },
       {
         id: 25,
-
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Samson",
         gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -688,14 +757,17 @@ export default createStore({
       },
       {
         id: 26,
-        name: "George Mary",
+        firstname: "George ",
+        lastname: "Mary",
         gmail: "mary@gmail,com",
-        status: true,
+        status: false,
         paid: false,
         unpaid: true,
         overdue: false,
         amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -715,7 +787,8 @@ export default createStore({
       },
       {
         id: 27,
-        name: "Steeve Mike",
+        firstname: "Steeve",
+        lastname: "Okoye",
         gmail: "mike@gmail,com",
         status: false,
         paid: false,
@@ -723,6 +796,8 @@ export default createStore({
         overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -742,14 +817,16 @@ export default createStore({
       },
       {
         id: 28,
-
-        name: "David Samson",
+        firstname: "David",
+        lastname: "Oprag",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
         unpaid: false,
         overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -770,14 +847,17 @@ export default createStore({
       },
       {
         id: 29,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -797,14 +877,17 @@ export default createStore({
       },
       {
         id: 30,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
+        firstname: "George ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
         status: false,
         paid: false,
-        unpaid: false,
-        overdue: true,
-        amount: 200,
+        unpaid: true,
+        overdue: false,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -824,15 +907,17 @@ export default createStore({
       },
       {
         id: 31,
-
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
+        firstname: "Steeve",
+        lastname: "Okoye",
+        gmail: "mike@gmail,com",
+        status: false,
+        paid: false,
         unpaid: false,
-        overdue: false,
+        overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -852,13 +937,16 @@ export default createStore({
       },
       {
         id: 32,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: "David",
+        lastname: "Winger",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -879,14 +967,17 @@ export default createStore({
       },
       {
         id: 33,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -906,15 +997,17 @@ export default createStore({
       },
       {
         id: 34,
-
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
-        unpaid: false,
+        firstname: "George ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
+        status: false,
+        paid: false,
+        unpaid: true,
         overdue: false,
-        amount: 200,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -934,14 +1027,17 @@ export default createStore({
       },
       {
         id: 35,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
-        status: true,
+        firstname: "Steeve",
+        lastname: "Okoye",
+        gmail: "mike@gmail,com",
+        status: false,
         paid: false,
-        unpaid: true,
-        overdue: false,
-        amount: 300,
+        unpaid: false,
+        overdue: true,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -961,13 +1057,16 @@ export default createStore({
       },
       {
         id: 36,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: " Oius",
+        lastname: "Wnka",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -988,8 +1087,8 @@ export default createStore({
       },
       {
         id: 37,
-
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Samson",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
@@ -997,6 +1096,8 @@ export default createStore({
         overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1016,14 +1117,17 @@ export default createStore({
       },
       {
         id: 38,
-        name: "George Mary",
+        firstname: "George ",
+        lastname: "Mary",
         gmail: "mary@gmail,com",
-        status: true,
+        status: false,
         paid: false,
         unpaid: true,
         overdue: false,
         amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1043,7 +1147,8 @@ export default createStore({
       },
       {
         id: 39,
-        name: "Steeve Mike",
+        firstname: "Steeve",
+        lastname: "Okoye",
         gmail: "mike@gmail,com",
         status: false,
         paid: false,
@@ -1051,6 +1156,8 @@ export default createStore({
         overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1070,14 +1177,16 @@ export default createStore({
       },
       {
         id: 40,
-
-        name: "David Samson",
+        firstname: " Oius",
+        lastname: "Broma",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
         unpaid: false,
         overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -1098,14 +1207,17 @@ export default createStore({
       },
       {
         id: 41,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1125,14 +1237,17 @@ export default createStore({
       },
       {
         id: 42,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
+        firstname: "George ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
         status: false,
         paid: false,
-        unpaid: false,
-        overdue: true,
-        amount: 200,
+        unpaid: true,
+        overdue: false,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1152,14 +1267,17 @@ export default createStore({
       },
       {
         id: 43,
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
+        firstname: "Steeve",
+        lastname: "Okoye",
+        gmail: "mike@gmail,com",
+        status: false,
+        paid: false,
         unpaid: false,
-        overdue: false,
+        overdue: true,
         amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1179,13 +1297,16 @@ export default createStore({
       },
       {
         id: 44,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: " Oius",
+        lastname: "Otuocha",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -1206,14 +1327,17 @@ export default createStore({
       },
       {
         id: 45,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Samson",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1233,14 +1357,17 @@ export default createStore({
       },
       {
         id: 46,
-        name: "David Samson",
-        gmail: "samson@gmail,com",
-        status: true,
-        paid: true,
-        unpaid: false,
+        firstname: "George ",
+        lastname: "Mary",
+        gmail: "mary@gmail,com",
+        status: false,
+        paid: false,
+        unpaid: true,
         overdue: false,
-        amount: 200,
+        amount: 300,
         viewmore: false,
+        dueDate: "15/APR/2020",
+        lastLogin: "10/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1260,14 +1387,17 @@ export default createStore({
       },
       {
         id: 47,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
-        status: true,
+        firstname: "Steeve",
+        lastname: "Okoye",
+        gmail: "mike@gmail,com",
+        status: false,
         paid: false,
-        unpaid: true,
-        overdue: false,
-        amount: 300,
+        unpaid: false,
+        overdue: true,
+        amount: 200,
         viewmore: false,
+        dueDate: "15/MAR/2020",
+        lastLogin: "14/APR/2020",
         details: [
           {
             date: "12/APR/2020",
@@ -1287,13 +1417,16 @@ export default createStore({
       },
       {
         id: 48,
-        name: "Steeve Mike",
-        gmail: "mike@gmail,com",
-        status: false,
-        paid: false,
+        firstname: "David ",
+        lastname: "Menka",
+        gmail: "samson@gmail,com",
+        status: true,
+        paid: true,
         unpaid: false,
-        overdue: true,
+        overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -1314,13 +1447,16 @@ export default createStore({
       },
       {
         id: 49,
-        name: "David Samson",
+        firstname: "David ",
+        lastname: "Winterz",
         gmail: "samson@gmail,com",
         status: true,
         paid: true,
         unpaid: false,
         overdue: false,
         amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -1341,13 +1477,16 @@ export default createStore({
       },
       {
         id: 50,
-        name: "George Mary",
-        gmail: "mary@gmail,com",
+        firstname: "David ",
+        lastname: "Check",
+        gmail: "samson@gmail,com",
         status: true,
-        paid: false,
-        unpaid: true,
+        paid: true,
+        unpaid: false,
         overdue: false,
-        amount: 300,
+        amount: 200,
+        dueDate: "12/APR/2020",
+        lastLogin: "10/APR/2020",
         viewmore: false,
         details: [
           {
@@ -1367,6 +1506,11 @@ export default createStore({
         ],
       },
     ],
+    searchInput: "",
+    debounceTimeout:null,
+
+    showModal: false,
+    secondUsers: [],
   },
   getters: {},
   mutations: {
@@ -1389,9 +1533,15 @@ export default createStore({
     payDues(state) {
       let focus = state.users.find((item) => item.focused == true);
       if (focus) {
-     state.users =    state.users.map((item) => {
+        state.users = state.users.map((item) => {
           if (item.id === focus.id) {
-            let obj = { ...item, paid: true, unpaid: false, overdue: false, focused:false };
+            let obj = {
+              ...item,
+              paid: true,
+              unpaid: false,
+              overdue: false,
+              focused: false,
+            };
             return obj;
           } else {
             return item;
@@ -1399,12 +1549,129 @@ export default createStore({
         });
       }
     },
-    getSum(state){
+    getSum(state) {
       state.sum = state.users.reduce((accumulator, object) => {
         return accumulator + object.amount;
       }, 0);
-    }
+      state.secondUsers = state.users;
+    },
+    filterByButtonName(state, payload) {
+      if (payload === "All") {
+        state.users = state.secondUsers;
+      } else if (payload === "Paid") {
+        state.users = state.secondUsers;
+
+        state.users = state.users.filter((item) => item.paid === true);
+      } else if (payload === "Unpaid") {
+        state.users = state.secondUsers;
+
+        state.users = state.users.filter((item) => item.unpaid === true);
+      } else if (payload === "Overdue") {
+        state.users = state.secondUsers;
+
+        state.users = state.users.filter((item) => item.overdue === true);
+      }
+      state.sum = state.users.reduce((accumulator, object) => {
+        return accumulator + object.amount;
+      }, 0);
+    },
+    sortBy(state, payload) {
+      if (payload === "active") {
+        state.users = state.users.sort((a, b) => {
+          if (a.status && !b.status) {
+            return -1;
+          } else if (!a.status && b.status) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      } else if (payload === "inactive") {
+        state.users = state.users.sort((a, b) =>
+          a.status === b.status ? 0 : a.status ? 1 : -1
+        );
+      } else if (payload === "all") {
+        state.users = state.secondUsers;
+      } else if (payload === "lastname") {
+        state.users = state.users.sort((a, b) => {
+          const nameA = a.lastname.toUpperCase();
+          const nameB = b.lastname.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (payload === "firstname") {
+        state.users = state.users.sort((a, b) => {
+          const nameA = a.firstname.toUpperCase();
+          const nameB = b.firstname.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (payload === "duedate") {
+        state.users = state.users.sort((a, b) => {
+          if (a.dueDate < b.dueDate) {
+            return -1;
+          }
+          if (a.dueDate > b.dueDate) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (payload === "laslogin") {
+        state.users = state.users.sort((a, b) => {
+          if (a.lastLogin < b.lastLogin) {
+            return -1;
+          }
+          if (a.lastLogin > b.lastLogin) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      state.showModal = false;
+    },
+    closeModal(state) {
+      state.showModal ? false : false;
+    },
+    toggleModal(state) {
+      state.showModal = !state.showModal;
+    },
+    searchFunction(state) {
+   
+    },
   },
-  actions: {},
+  actions: {  
+    search: debounce(({ commit, state }) => {
+    let searchInput = state.searchInput;
+    const filteredUsers = state.users.filter((user) => {
+      const { firstname, lastname, gmail } = user;
+      return (
+        firstname.toLowerCase().includes(searchInput.toLowerCase()) ||
+        lastname.toLowerCase().includes(searchInput.toLowerCase()) ||
+        gmail.toLowerCase().includes(searchInput.toLowerCase()) ||
+        (firstname + lastname)
+          .toLowerCase()
+          .includes(searchInput.toLowerCase())
+      );
+    });
+    if(searchInput.length > 0){
+      console.log(searchInput);
+      state.users = filteredUsers
+    }else{
+      state.users = state.secondUsers
+    }
+        commit('searchFunction', searchInput);
+    // ...
+  }, 500)
+},
   modules: {},
 });

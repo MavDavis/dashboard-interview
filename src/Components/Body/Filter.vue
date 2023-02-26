@@ -3,7 +3,7 @@
     <div class="select relative">
       <button
         class="relative z-10 block w-full h-full overflow-hidden focus:outline-none leading-loose align-middle rounded cursor-pointer t"
-        @click="isOpen = !isOpen"
+        @click="toggleModal"
       >
         <svg
           width="88"
@@ -41,53 +41,36 @@
         </svg>
       </button>
       <button
-        v-if="isOpen"
-        @click="isOpen = false"
+        v-if="$store.state.showModal"
+        @click="this.$store.commit('closemodal')"
         tabindex="-1"
         class="top-0 inset-0 h-full w-full bg-black opacity-0 cursor-default"
       ></button>
       <div
-        v-if="isOpen"
+        v-if="$store.state.showModal"
         class="absolute z-50 left-0 py-2 mt-2 rounded-lg bg-white showFilters shadow-lg text-sm"
       >
         <p class="px-3 text-purple-light font-light my-1">Sort By:</p>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Default</p>
-          <div class="circle active"></div>
+        <div v-for="item in sortByList"
+          class="flex w-full justify-between eachShowFilter py-1 px-3"
+          @click="sortBy(item.method)"
+        >
+          <p>{{item.name}}</p>
+          <div class="circle " :class="[item.active? 'active':'']"></div>
         </div>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Firstname</p>
-          <div class="circle"></div>
-        </div>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Lastname</p>
-          <div class="circle"></div>
-        </div>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Due date</p>
-          <div class="circle"></div>
-        </div>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Last login</p>
-          <div class="circle"></div>
-        </div>
+     
         <div
           class="bordered w-full border-purple-light border-x-0 border-t border-b-0"
         ></div>
         <p class="px-4 text-purple-light font-light my-1">Users:</p>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>All</p>
-          <div class="circle"></div>
+        <div v-for="item in sortbyUsers"
+          class="flex w-full justify-between eachShowFilter py-1 px-3"
+          @click="sortBy1(item.method)"
+        >
+          <p>{{item.name}}</p>
+          <div class="circle" :class="[item.active ? 'active':'']"></div>
         </div>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Active</p>
-          <div class="circle"></div>
-        </div>
-        <div class="flex w-full justify-between eachShowFilter py-1 px-3">
-          <p>Inactive</p>
-          <div class="circle"></div>
-        </div>
-       
+    
       </div>
     </div>
   </div>
@@ -99,12 +82,38 @@ export default {
   data() {
     return {
       isOpen: false,
- 
+      sortByList: [
+        { name: "Default", active: true, method: "default" },
+        { name: "Firstname", active: false, method: "firstname" },
+        { name: "Lastname", active: false, method: "lastname" },
+        { name: "Due date", active: false, method: "duedate" },
+        { name: "Last login", active: false, method: "laslogin" },
+      ],
+      sortbyUsers: [
+        { name: "All", active: false, method: "all" },
+        { name: "Active", active: false, method: "active" },
+        { name: "Inactive", active: false, method: "inactive" },
+      ],
     };
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    sortBy(method) {
+      this.sortByList = this.sortByList.map(item => item.method === method ? {...item, active:true}:{...item, active:false})
+      this.sortbyUsers = this.sortbyUsers.map(item=>({...item, active:false}))
+      this.$store.commit("sortBy", method);
+    },
+    sortBy1(method) {
+      this.sortbyUsers = this.sortbyUsers.map(item => item.method === method ? {...item, active:true}:{...item, active:false})
+      this.sortByList = this.sortByList.map(item=>({...item, active:false}))
+
+      this.$store.commit("sortBy", method);
+    },
+    toggleModal() {
+      this.$store.commit("toggleModal");
+    },
+  },
   watch: {},
 };
 </script>
@@ -126,14 +135,13 @@ export default {
 .eachShowFilter:hover {
   background: #c6c2de;
 }
-.circle{
-  border: 
-    2px solid #c6c2de;
-border-radius: 9999px;
-height: 10px;
-width: 10px;
+.circle {
+  border: 2px solid #c6c2de;
+  border-radius: 9999px;
+  height: 10px;
+  width: 10px;
 }
-.circle.active{
-  background: #6D5BD0;
+.circle.active {
+  background: #6d5bd0;
 }
 </style>

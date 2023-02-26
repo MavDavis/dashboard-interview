@@ -1,7 +1,7 @@
 <template>
     <div class=" w-full bordered rounded-md min-h-screen mt-6 h-fit">
   <Navbar/>
-  <User/>
+  <User />
     </div>
   </template>
   
@@ -17,7 +17,7 @@
     created() {
     
     },
-    components:{Navbar, User},
+    components:{Navbar, User, },
     mounted() {
   
   

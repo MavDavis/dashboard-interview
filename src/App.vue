@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper app py-12 sm:px-16 px-4">
+  <div class="app-wrapper app py-12 sm:px-16 px-4" @click="this.$store.commit('closeModal')">
 <Header/>
 <Body/>
   </div>

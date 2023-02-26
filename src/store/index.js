@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
 
 export default createStore({
   state: {
@@ -1507,7 +1507,7 @@ export default createStore({
       },
     ],
     searchInput: "",
-    debounceTimeout:null,
+    debounceTimeout: null,
 
     showModal: false,
     secondUsers: [],
@@ -1649,35 +1649,29 @@ export default createStore({
       let searchInput = state.searchInput;
 
       if (searchInput.length > 0) {
-return      } else {
+        return;
+      } else {
         state.users = state.secondUsers;
       }
     },
   },
-  actions: {  
+  actions: {
     search: debounce(({ commit, state }) => {
-    let searchInput = state.searchInput;
-    const filteredUsers = state.users.filter((user) => {
-      const { firstname, lastname, gmail } = user;
-    const userDetails = (`${firstname} ${lastname} ${gmail}`  );
+      let searchInput = state.searchInput;
+      const filteredUsers = state.users.filter((user) => {
+        const { firstname, lastname, gmail } = user;
+        const userDetails = `${firstname} ${lastname} ${gmail}`;
 
-      return (
-        userDetails.toLowerCase().includes(searchInput.toLowerCase())
-      )
-    });
-    if(searchInput.length > 0){
-      state.users = filteredUsers
-    }else{
-      state.users = state.secondUsers
-    }
-        commit('searchFunction', searchInput);
-    // ...
-  }, 500)
-},
-
-
-
-
+        return userDetails.toLowerCase().includes(searchInput.toLowerCase());
+      });
+      if (searchInput.length > 0) {
+        state.users = filteredUsers;
+      } else {
+        state.users = state.secondUsers;
+      }
+      commit("searchFunction", searchInput);
+    }, 500),
+  },
 
   modules: {},
 });

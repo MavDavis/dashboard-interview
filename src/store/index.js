@@ -1689,7 +1689,7 @@ export default createStore({
   actions: {
     search: debounce(({ commit, state }) => {
       let searchInput = state.searchInput;
-      const filteredUsers = state.users.filter((user) => {
+      const filteredUsers = state.secondUsers.filter((user) => {
         const { firstname, lastname, gmail } = user;
         const userDetails = `${firstname} ${lastname} ${gmail}`;
 

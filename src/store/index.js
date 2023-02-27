@@ -1506,6 +1506,7 @@ export default createStore({
         ],
       },
     ],
+    currentItems:0,
     buttons:[{name:'All', active:true}, {name:'Paid', active:false}, {name:'Unpaid', active:false}, {name:'Overdue', active:false}],
 
     sortByList: [
@@ -1570,6 +1571,7 @@ export default createStore({
       state.secondUsers = state.users;
     },
     filterByButtonName(state, payload) {
+      state.currentItems = 0
       if (payload === "All") {
         state.users = state.secondUsers;
       } else if (payload === "Paid") {

@@ -135,7 +135,7 @@
   >
     <div class="w-3/5 flex items-center"></div>
     <p>Rows per page 10</p>
-    <p class="mx-10">{{ this.currentItems +1  }}-{{ this.currentItems + 10}} 0f 50</p>
+    <p class="mx-10">{{ this.$store.state.currentItems +1  }}-{{ this.$store.state.currentItems + 10}} 0f 50</p>
     <div class="flex justify-between w-24 text-lg">
       <i
         class="fas fa-chevron-left cursor-pointer ml-1 hover:ml-0"
@@ -168,8 +168,8 @@ export default {
   computed: {
     sliceArray() {
       return this.$store.state.users.slice(
-        this.currentItems,
-        this.currentItems + 10
+        this.$store.state.currentItems,
+        this.$store.state.currentItems + 10
       );
     },
   },
@@ -179,17 +179,17 @@ export default {
   methods: {
     movePage(method) {
       let arrayLength = this.$store.state.users.length;
-      let arrayCheck = this.currentItems;
+      let arrayCheck = this.$store.state.currentItems;
       if (method === "decrease") {
         if (arrayCheck !== 0 && arrayCheck !== 10) {
-          this.currentItems = arrayCheck - 10;
+          this.$store.state.currentItems = arrayCheck - 10;
         } else {
           return;
         }
       }
       if (method === "increase") {
         if (arrayCheck !== arrayLength - 10) {
-          this.currentItems = arrayCheck + 10;
+          this.$store.state.currentItems = arrayCheck + 10;
         } else {
           return;
         }

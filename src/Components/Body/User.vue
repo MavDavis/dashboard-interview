@@ -181,14 +181,14 @@ export default {
       let arrayLength = this.$store.state.users.length;
       let arrayCheck = this.$store.state.currentItems;
       if (method === "decrease") {
-        if (arrayCheck !== 0 && arrayCheck !== 10) {
+        if (arrayCheck !== 0 && arrayCheck >= 10) {
           this.$store.state.currentItems = arrayCheck - 10;
         } else {
           return;
         }
       }
       if (method === "increase") {
-        if (arrayCheck !== arrayLength - 10) {
+        if (arrayCheck < arrayLength - 10) {
           this.$store.state.currentItems = arrayCheck + 10;
         } else {
           return;

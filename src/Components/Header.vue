@@ -4,7 +4,7 @@
       <h1 class="table-header">table-heading</h1>
       <div class="flex w-full justify-between  give-border">
         <div class="buttons flex items-center">
-          <button v-for="button in buttons" @click="toggleActive(button.name)" class="button py-2 hover:border-b   border-black h-full" :class ="[button.active? 'active' :'']">{{ button.name }}</button>
+          <button v-for="button in $store.state.buttons" @click="toggleActive(button.name)" class="button py-2 hover:border-b   border-black h-full" :class ="[button.active? 'active' :'']">{{ button.name }}</button>
          
         </div>
         <div class="flex sm:flex-row flex-col text items-center py-2">
@@ -22,7 +22,6 @@ export default {
   name: "",
   data() {
     return {
-      buttons:[{name:'All', active:true}, {name:'Paid', active:false}, {name:'Unpaid', active:false}, {name:'Overdue', active:false}]
     };
   },
   created() {
@@ -31,7 +30,7 @@ export default {
   mounted() {},
   methods: {
     toggleActive(name){
-     this.buttons =  this.buttons.map(button=>button.name === name ? {...button, active:true} :{...button, active:false})
+      this.$store.commit('toggleActive', name)
      this.$store.commit('filterByButtonName', name)
     }
   },

@@ -51,7 +51,7 @@
         class="absolute z-50 left-0 py-2 mt-2 rounded-lg bg-white showFilters shadow-lg text-sm"
       >
         <p class="px-3 text-purple-light font-light my-1">Sort By:</p>
-        <div v-for="item in sortByList"
+        <div v-for="item in $store.state.sortByList"
           class="flex w-full justify-between eachShowFilter py-1 px-3"
           @click="sortBy(item.method)"
         >
@@ -63,7 +63,7 @@
           class="bordered w-full border-purple-light border-x-0 border-t border-b-0"
         ></div>
         <p class="px-4 text-purple-light font-light my-1">Users:</p>
-        <div v-for="item in sortbyUsers"
+        <div v-for="item in $store.state.sortbyUsers"
           class="flex w-full justify-between eachShowFilter py-1 px-3"
           @click="sortBy1(item.method)"
         >
@@ -82,33 +82,22 @@ export default {
   data() {
     return {
       isOpen: false,
-      sortByList: [
-        { name: "Default", active: true, method: "default" },
-        { name: "Firstname", active: false, method: "firstname" },
-        { name: "Lastname", active: false, method: "lastname" },
-        { name: "Due date", active: false, method: "duedate" },
-        { name: "Last login", active: false, method: "laslogin" },
-      ],
-      sortbyUsers: [
-        { name: "All", active: false, method: "all" },
-        { name: "Active", active: false, method: "active" },
-        { name: "Inactive", active: false, method: "inactive" },
-      ],
+  
     };
   },
   created() {},
   mounted() {},
   methods: {
     sortBy(method) {
-      this.sortByList = this.sortByList.map(item => item.method === method ? {...item, active:true}:{...item, active:false})
-      this.sortbyUsers = this.sortbyUsers.map(item=>({...item, active:false}))
       this.$store.commit("sortBy", method);
+    
+      this.$store.commit("sortBys", method);
+
     },
     sortBy1(method) {
-      this.sortbyUsers = this.sortbyUsers.map(item => item.method === method ? {...item, active:true}:{...item, active:false})
-      this.sortByList = this.sortByList.map(item=>({...item, active:false}))
-
       this.$store.commit("sortBy", method);
+      this.$store.commit("sortBy1", method);
+
     },
     toggleModal() {
       this.$store.commit("toggleModal");

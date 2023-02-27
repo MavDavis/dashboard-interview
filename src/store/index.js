@@ -1506,6 +1506,20 @@ export default createStore({
         ],
       },
     ],
+    buttons:[{name:'All', active:true}, {name:'Paid', active:false}, {name:'Unpaid', active:false}, {name:'Overdue', active:false}],
+
+    sortByList: [
+      { name: "Default", active: true, method: "default" },
+      { name: "Firstname", active: false, method: "firstname" },
+      { name: "Lastname", active: false, method: "lastname" },
+      { name: "Due date", active: false, method: "duedate" },
+      { name: "Last login", active: false, method: "laslogin" },
+    ],
+    sortbyUsers: [
+      { name: "All", active: false, method: "all" },
+      { name: "Active", active: false, method: "active" },
+      { name: "Inactive", active: false, method: "inactive" },
+    ],
     searchInput: "",
     debounceTimeout: null,
 
@@ -1638,6 +1652,21 @@ export default createStore({
         });
       }
       state.showModal = false;
+      state.buttons =  state.buttons.map(button=>button.name === 'All' ? {...button, active:true} :{...button, active:false})
+      state.sum = state.users.reduce((accumulator, object) => {
+        return accumulator + object.amount;
+      }, 0);    },
+    toggleActive(state, payload){
+      state.buttons =  state.buttons.map(button=>button.name === payload ? {...button, active:true} :{...button, active:false})
+     },
+    sortBys(state, payload) {
+      state.sortByList = state.sortByList.map(item => item.method === payload ? {...item, active:true}:{...item, active:false})
+      state.sortbyUsers = state.sortbyUsers.map(item=>({...item, active:false}))
+    },
+    sortBy1(state, payload) {
+      state.sortbyUsers = state.sortbyUsers.map(item => item.method === payload ? {...item, active:true}:{...item, active:false})
+      state.sortByList = state.sortByList.map(item=>({...item, active:false}))
+
     },
     closeModal(state) {
       state.showModal ? false : false;

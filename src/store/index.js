@@ -1691,7 +1691,7 @@ export default createStore({
       let searchInput = state.searchInput;
       const filteredUsers = state.secondUsers.filter((user) => {
         const { firstname, lastname, gmail } = user;
-        const userDetails = `${firstname} ${lastname} ${gmail}`;
+        const userDetails = `${firstname}${''}${lastname}${''}${gmail}`;
 
         return userDetails.toLowerCase().includes(searchInput.toLowerCase());
       });
